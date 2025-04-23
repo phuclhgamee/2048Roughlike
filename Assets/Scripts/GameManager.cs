@@ -63,10 +63,10 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.enabled = true;
         
-        FourLuckyMergeEvent.Raise();
-        SuperEightEvent.Raise();
+        // FourLuckyMergeEvent.Raise();
+        // SuperEightEvent.Raise();
     }
-
+    
     public void ListenEventFourLuckyMerge()
     {
         FourLuckyMergeUpgrade fourLuckyMerge =(FourLuckyMergeUpgrade) FourLuckeyMergeGroup.Upgrades[0];

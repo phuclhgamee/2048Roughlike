@@ -6,5 +6,11 @@ namespace Roughlike2048
     public class UpgradeGroup : ScriptableObject
     {
         public Upgrade[] Upgrades;
+        public UpgradeType Type;
+    }
+    public enum UpgradeType
+    {
+        Normal,
+        Rare
     }
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41406c0e40a0410d933e4e19f60b27cd, type: 3}
-  m_Name: SuperEightUpgradeGroup
+  m_Name: HighRollerUpgradeGroup
   m_EditorClassIdentifier: 
   Upgrades:
-  - {fileID: 11400000, guid: 11ffc43cdde98214ca9249b45af527ae, type: 2}
-  - {fileID: 11400000, guid: c02ce07408e3be248bc892e22afb8a7e, type: 2}
-  - {fileID: 11400000, guid: 1da851b7f93101e4db82ceb8859d47ac, type: 2}
-  - {fileID: 11400000, guid: 57e2681cb1d74574294e6c12915ea231, type: 2}
+  - {fileID: 11400000, guid: 6fd2197688e97cb49acb64568fd852d8, type: 2}
+  - {fileID: 11400000, guid: c9350c9b22e98cc438ca1a7a33bd2d58, type: 2}
+  - {fileID: 11400000, guid: db85f49231246b6449967ea9dda28566, type: 2}
+  Type: 0

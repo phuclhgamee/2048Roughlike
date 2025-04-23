@@ -1372,6 +1372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 997205596}
   - component: {fileID: 997205597}
+  - component: {fileID: 997205598}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -1432,8 +1433,39 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19b4310b755bd894a999f0202d2f671d, type: 2}
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
-  FourLuckyMerge: {fileID: 0}
+  HighRollerEvent: {fileID: 11400000, guid: 488ac33592f8b0b4c8244e28d1d61663, type: 2}
+  ChangingFourTileEvent: {fileID: 0}
   FourLuckyMergeProbability: {fileID: 11400000, guid: 3306921d796993848b1f2846c5406dd4, type: 2}
+  SuperEightProbability: {fileID: 11400000, guid: b6282cea72fc9db41814b31b3891d6b6, type: 2}
+  HighRollerUpgradeGroups: {fileID: 11400000, guid: 68822d73e2bb31a4db2b2fec4d89dcde, type: 2}
+--- !u!114 &997205598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997205595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseEvent: {fileID: 11400000, guid: 488ac33592f8b0b4c8244e28d1d61663, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997205597}
+        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
+        m_MethodName: SetStateByNumber
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1095350276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,6 +1968,7 @@ GameObject:
   - component: {fileID: 1601929140}
   - component: {fileID: 1601929139}
   - component: {fileID: 1601929141}
+  - component: {fileID: 1601929142}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1960,8 +1993,11 @@ MonoBehaviour:
   scoreText: {fileID: 791552736}
   hiscoreText: {fileID: 67294057}
   FourLuckyMergeEvent: {fileID: 11400000, guid: 5e3fb24d8721d91489ec6232a1281862, type: 2}
+  SuperEightEvent: {fileID: 11400000, guid: 7e1d838e04c422643b8b6c470cf98807, type: 2}
   FourLuckyMergeProbability: {fileID: 11400000, guid: 3306921d796993848b1f2846c5406dd4, type: 2}
   FourLuckeyMergeGroup: {fileID: 11400000, guid: 41cd138aa93201047b5943b7d2981e2d, type: 2}
+  SuperEightProbability: {fileID: 11400000, guid: b6282cea72fc9db41814b31b3891d6b6, type: 2}
+  SuperEightGroup: {fileID: 11400000, guid: f0d6c36b8f761d140975172f8d4d3190, type: 2}
 --- !u!4 &1601929140
 Transform:
   m_ObjectHideFlags: 0
@@ -1996,6 +2032,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1601929139}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ListenEventFourLuckyMerge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1601929142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601929138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseEvent: {fileID: 11400000, guid: 7e1d838e04c422643b8b6c470cf98807, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1601929139}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ListenEventSuperEight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

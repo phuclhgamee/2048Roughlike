@@ -1,27 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using Roughlike2048;
 using Roughlike2048.Event;
 using UnityEngine;
+using Event = Roughlike2048.Event.Event;
 
 public class TileBoard : MonoBehaviour
 {
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private TileState[] tileStates;
     
-    [Header("Event")]
-    [SerializeField] private BaseEventListener FourLuckyMerge;
     private TileGrid grid;
     private List<Tile> tiles;
     private bool waiting;
-
+    private TileState startedTileState;
+    [Header("Events")] 
+    [SerializeField] private Event HighRollerEvent;    
+    [SerializeField] private Event ChangingFourTileEvent; 
+    
     [Header("Stats")] 
     [SerializeField] private FloatVariable FourLuckyMergeProbability;
     [SerializeField] private FloatVariable SuperEightProbability;
+    
+    [Header("UpgradesGroup")]
+    [SerializeField] private UpgradeGroup HighRollerUpgradeGroups;
+    [SerializeField] private UpgradeGroup ChangingFourTilesUpgradeGroups;
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
         tiles = new List<Tile>(16);
+        startedTileState = tileStates[0];
+        //HighRollerEvent.Raise();
+        
     }
 
     public void ClearBoard()
@@ -36,15 +49,36 @@ public class TileBoard : MonoBehaviour
 
         tiles.Clear();
     }
-
+    
     public void CreateTile()
     {
         Tile tile = Instantiate(tilePrefab, grid.transform);
-        tile.SetState(tileStates[0]);
+        tile.SetState(GetTileCreated(startedTileState));
         tile.Spawn(grid.GetRandomEmptyCell());
         tiles.Add(tile);
     }
 
+    public void SetStateByNumber(int number)
+    {
+        TileState state = tileStates.Where(s=>s.number == number).FirstOrDefault();
+        startedTileState = state;
+    }
+    public void SetStateByNumber()
+    {
+        HighRollerUpgrade highRollerUpgrade =(HighRollerUpgrade) HighRollerUpgradeGroups.Upgrades[1];
+        int number = highRollerUpgrade.startedNumber;
+        TileState state = tileStates.Where(s=>s.number == number).FirstOrDefault();
+        if (state != null)
+            startedTileState = state;
+    }
+    public TileState GetTileCreated(TileState state)
+    {
+        if(GetByProbability(0.9f))
+        {
+            return state;
+        }
+        return tileStates[Mathf.Clamp(IndexOf(state) + 1, 0, tileStates.Length - 1)];
+    }
     private void Update()
     {
         if (waiting) return;
@@ -58,8 +92,34 @@ public class TileBoard : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
             Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
         }
+        
+        if (CheckingFourTiles(4, 2))
+        {
+            ChangingFourTileEvent.Raise();
+        }
+
     }
 
+    public void ListenEventChangingFourTiles()
+    {
+        ChangingFourTileUpgrade changingFourTileUpgrade =(ChangingFourTileUpgrade) ChangingFourTilesUpgradeGroups.Upgrades[0];
+        
+        int numberOfTiles = changingFourTileUpgrade.NumberOfTiles;
+        int tileNumberValue = changingFourTileUpgrade.TileNumberValue;
+        
+        var tileList = tiles.Where(t=>t.state.number == tileNumberValue).ToList();
+        foreach (var tile in tileList)
+        {
+            TileState state = tileStates[Mathf.Clamp(IndexOf(tile.state) + (int)Mathf.Sqrt(changingFourTileUpgrade.Multiple)
+                , 0, tileStates.Length - 1)];
+            tile.SetState(state);
+        }
+            
+    }
+    public bool CheckingFourTiles(int numberOfTiles, int tileNumberValue)
+    {
+        return tiles.Where(t=>t.state.number == tileNumberValue).ToList().Count() == numberOfTiles;
+    }
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         bool changed = false;
@@ -132,10 +192,10 @@ public class TileBoard : MonoBehaviour
     private int GetMergeTileIndex(Tile a, Tile b)
     {
         int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
-        // if (GetByProbability(FourLuckyMergeProbability.Value) && a.state.number ==4)
-        // {
-        //     index = Mathf.Clamp(IndexOf(b.state) + 2, 0, tileStates.Length - 1);
-        // }
+        if (GetByProbability(FourLuckyMergeProbability.Value) && a.state.number ==4)
+        {
+            index = Mathf.Clamp(IndexOf(b.state) + 2, 0, tileStates.Length - 1);
+        }
         if (GetByProbability(SuperEightProbability.Value) && a.state.number ==8)
         {
             index = Mathf.Clamp(IndexOf(b.state) + 2, 0, tileStates.Length - 1);
