@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Roughlike2048.Event;
 using UnityEngine;
 
 public class TileBoard : MonoBehaviour
 {
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private TileState[] tileStates;
-
+    
+    [Header("Event")]
+    [SerializeField] private BaseEventListener FourLuckyMerge;
     private TileGrid grid;
     private List<Tile> tiles;
     private bool waiting;
 
+    [Header("Stats")] 
+    [SerializeField] private FloatVariable FourLuckyMergeProbability;
+    [SerializeField] private FloatVariable SuperEightProbability;
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -115,13 +122,30 @@ public class TileBoard : MonoBehaviour
         tiles.Remove(a);
         a.Merge(b.cell);
 
-        int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
+        int index = GetMergeTileIndex(a, b);
         TileState newState = tileStates[index];
 
         b.SetState(newState);
         GameManager.Instance.IncreaseScore(newState.number);
     }
 
+    private int GetMergeTileIndex(Tile a, Tile b)
+    {
+        int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
+        // if (GetByProbability(FourLuckyMergeProbability.Value) && a.state.number ==4)
+        // {
+        //     index = Mathf.Clamp(IndexOf(b.state) + 2, 0, tileStates.Length - 1);
+        // }
+        if (GetByProbability(SuperEightProbability.Value) && a.state.number ==8)
+        {
+            index = Mathf.Clamp(IndexOf(b.state) + 2, 0, tileStates.Length - 1);
+        }
+        return index;
+    }
+    public bool GetByProbability(float probability)
+    {
+        return UnityEngine.Random.value <= probability;  
+    }
     private int IndexOf(TileState state)
     {
         for (int i = 0; i < tileStates.Length; i++)

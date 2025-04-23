@@ -1,17 +1,29 @@
 using System.Collections;
+using Roughlike2048;
+using Roughlike2048.Event;
 using TMPro;
 using UnityEngine;
+using Event = Roughlike2048.Event.Event;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    [Header("UI")]
     [SerializeField] private TileBoard board;
     [SerializeField] private CanvasGroup gameOver;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
+    
+    [Header("Event")]
+    [SerializeField] private Event FourLuckyMergeEvent;
+    [SerializeField] private Event SuperEightEvent;
 
+    [Header("Stats")] 
+    [SerializeField] private FloatVariable FourLuckyMergeProbability;
+    [SerializeField] private UpgradeGroup FourLuckeyMergeGroup;
+    [SerializeField] private FloatVariable SuperEightProbability;
+    [SerializeField] private UpgradeGroup SuperEightGroup;
     public int score { get; private set; } = 0;
 
     private void Awake()
@@ -34,13 +46,13 @@ public class GameManager : MonoBehaviour
     {
         NewGame();
     }
-
+    
     public void NewGame()
     {
         // reset score
         SetScore(0);
         hiscoreText.text = LoadHiscore().ToString();
-
+        
         // hide game over screen
         gameOver.alpha = 0f;
         gameOver.interactable = false;
@@ -50,8 +62,21 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
+        
+        FourLuckyMergeEvent.Raise();
+        SuperEightEvent.Raise();
     }
 
+    public void ListenEventFourLuckyMerge()
+    {
+        FourLuckyMergeUpgrade fourLuckyMerge =(FourLuckyMergeUpgrade) FourLuckeyMergeGroup.Upgrades[0];
+        FourLuckyMergeProbability.Value = fourLuckyMerge.Probability;
+    }
+    public void ListenEventSuperEight()
+    {
+        SuperEightUpgrade superEight =(SuperEightUpgrade) SuperEightGroup.Upgrades[0];
+        SuperEightProbability.Value = superEight.Probability;
+    }
     public void GameOver()
     {
         board.enabled = false;
