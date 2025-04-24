@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e8d3994685a48adaa9ad6faa97a8ad5, type: 3}
-  m_Name: SuperEIghtEvent
+  m_Script: {fileID: 11500000, guid: 65ced2c625523d24493389d6f71ffa41, type: 3}
+  m_Name: UnderUpgrade Lv3
   m_EditorClassIdentifier: 
+  Description: 
+  GoBackTurns: 8
+  CoolDownTurns: 8

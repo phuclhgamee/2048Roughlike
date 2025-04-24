@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Roughlike2048.Event
 {
-    public class BaseEvent : ScriptableObject
+    public class BaseEvent : ScriptableObject, IEvent
     {
         private List<BaseEventListener> listeners = new List<BaseEventListener>();
     
@@ -32,7 +32,7 @@ namespace Roughlike2048.Event
         }
     }
     
-    public class BaseEvent<T> : ScriptableObject
+    public class BaseEvent<T> : ScriptableObject, IEvent
     {
         private List<BaseEventListener<T>> listeners = new List<BaseEventListener<T>>();
 

@@ -12,6 +12,11 @@ public class Tile : MonoBehaviour
     private Image background;
     private TextMeshProUGUI text;
 
+    public Tile(StoredTile storedTile)
+    {
+        this.state = storedTile.state;
+        this.cell = storedTile.cell;
+    }
     private void Awake()
     {
         background = GetComponent<Image>();
@@ -84,4 +89,16 @@ public class Tile : MonoBehaviour
         }
     }
 
+}
+
+public class StoredTile
+{
+    public TileCell cell;
+    public TileState state;
+
+    public StoredTile(Tile tile)
+    {
+        this.cell = tile.cell;
+        this.state = tile.state;
+    }
 }

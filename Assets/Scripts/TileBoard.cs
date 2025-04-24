@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using Roughlike2048;
 using Roughlike2048.Event;
 using UnityEngine;
+using UnityEngine.UI;
 using Event = Roughlike2048.Event.Event;
 
 public class TileBoard : MonoBehaviour
@@ -16,27 +17,51 @@ public class TileBoard : MonoBehaviour
     private TileGrid grid;
     private List<Tile> tiles;
     private bool waiting;
-    private TileState startedTileState;
+    private Stack<List<StoredTile>> tilesStack;
+    private int moveCount = 0;
+    private bool isUnderFinishedCoolDown =false;
+    public int MoveCount
+    {
+        get { return moveCount; }
+        set
+        {
+            moveCount = value;
+            UnderButton.interactable = false;
+            if (moveCount >= 4)
+            {
+                UnderButton.interactable = true;
+            }
+            
+        }
+    }
+    
     [Header("Events")] 
-    [SerializeField] private Event HighRollerEvent;    
-    [SerializeField] private Event ChangingFourTileEvent; 
     
     [Header("Stats")] 
     [SerializeField] private FloatVariable FourLuckyMergeProbability;
     [SerializeField] private FloatVariable SuperEightProbability;
+    [SerializeField] private TileStateVariables HighRollerState;
+    [SerializeField] private BooleanVariable IsUnderUpgradeEnabled;
+    [SerializeField] private BooleanVariable IsChangingFourTilesUpgradeEnabled;
+    [SerializeField] private UpgradeStatusVariable upgradeStatusVariable;
     
     [Header("UpgradesGroup")]
     [SerializeField] private UpgradeGroup HighRollerUpgradeGroups;
     [SerializeField] private UpgradeGroup ChangingFourTilesUpgradeGroups;
+    
+    [Header("UI")]
+    [SerializeField] private Button UnderButton;
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
         tiles = new List<Tile>(16);
-        startedTileState = tileStates[0];
+        tilesStack = new Stack<List<StoredTile>>();
+        HighRollerState.Value = tileStates[0];
         //HighRollerEvent.Raise();
-        
+        //UnderEvent.Raise();
+        //ChangingFourTileEvent.Raise();
     }
-
+    
     public void ClearBoard()
     {
         foreach (var cell in grid.cells) {
@@ -53,15 +78,84 @@ public class TileBoard : MonoBehaviour
     public void CreateTile()
     {
         Tile tile = Instantiate(tilePrefab, grid.transform);
-        tile.SetState(GetTileCreated(startedTileState));
+        tile.SetState(GetTileCreated(HighRollerState.Value));
         tile.Spawn(grid.GetRandomEmptyCell());
         tiles.Add(tile);
     }
+    public void CreateTile(Tile createdTile)
+    {
+        Tile tile = Instantiate(tilePrefab, grid.transform);
+        tile.SetState(createdTile.state);
+        tile.Spawn(createdTile.cell);
+        tiles.Add(tile);
+    }
+    
+    private void Update()
+    {
+        if (waiting) return;
+        if (CheckForGameOver()) return;
+        
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+            Move(Vector2Int.up, 0, 1, 1, 1);
+            
+        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
+            Move(Vector2Int.left, 1, 1, 0, 1);
+            
+        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
+            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
+            
+        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
+            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
+        }
 
+        ChangingFourTiles();
+    }
+    #region UnderEvent
+    public void StoreTileInStack(List<Tile> tilesPosition)
+    {
+        List<StoredTile> storedTiles = new List<StoredTile>();
+        foreach (var tile in tilesPosition)
+        {
+            storedTiles.Add(new StoredTile(tile));
+        }
+        tilesStack.Push(storedTiles);
+    }
+
+    public void UnderEventResponse()
+    {
+        IsUnderUpgradeEnabled.Value = true;
+    }
+
+    public void EnableUnderButton(bool active)
+    {
+        UnderButton.gameObject.SetActive(IsUnderUpgradeEnabled.Value);
+    }
+    
+    public void OnClickUnderButton()
+    {
+        var popedTiles = new List<StoredTile>();
+        for (int i = 0; i < 2; i++)
+        {
+            popedTiles.Clear();
+            popedTiles = tilesStack.Pop();
+        }
+        ClearBoard();
+        
+        foreach (StoredTile storedTile in popedTiles)
+        {
+            Tile tile = new Tile(storedTile);
+            CreateTile(tile);
+        }
+        MoveCount = 0;
+        
+    }
+    #endregion
+    
+    #region HighRollerEvent
     public void SetStateByNumber(int number)
     {
         TileState state = tileStates.Where(s=>s.number == number).FirstOrDefault();
-        startedTileState = state;
+        HighRollerState.Value = state;
     }
     public void SetStateByNumber()
     {
@@ -69,7 +163,7 @@ public class TileBoard : MonoBehaviour
         int number = highRollerUpgrade.startedNumber;
         TileState state = tileStates.Where(s=>s.number == number).FirstOrDefault();
         if (state != null)
-            startedTileState = state;
+            HighRollerState.Value = state;
     }
     public TileState GetTileCreated(TileState state)
     {
@@ -79,49 +173,43 @@ public class TileBoard : MonoBehaviour
         }
         return tileStates[Mathf.Clamp(IndexOf(state) + 1, 0, tileStates.Length - 1)];
     }
-    private void Update()
-    {
-        if (waiting) return;
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-            Move(Vector2Int.up, 0, 1, 1, 1);
-        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-            Move(Vector2Int.left, 1, 1, 0, 1);
-        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-            Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
-        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-            Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
-        }
-        
-        if (CheckingFourTiles(4, 2))
-        {
-            ChangingFourTileEvent.Raise();
-        }
-
-    }
-
-    public void ListenEventChangingFourTiles()
+    #endregion
+    
+    #region ChangingFourTilesUpgradeEvent
+    public void ChangingFourTiles()
     {
         ChangingFourTileUpgrade changingFourTileUpgrade =(ChangingFourTileUpgrade) ChangingFourTilesUpgradeGroups.Upgrades[0];
         
         int numberOfTiles = changingFourTileUpgrade.NumberOfTiles;
         int tileNumberValue = changingFourTileUpgrade.TileNumberValue;
-        
-        var tileList = tiles.Where(t=>t.state.number == tileNumberValue).ToList();
-        foreach (var tile in tileList)
+        if (CheckingFourTiles(numberOfTiles, tileNumberValue) && IsChangingFourTilesUpgradeEnabled.Value)
         {
-            TileState state = tileStates[Mathf.Clamp(IndexOf(tile.state) + (int)Mathf.Sqrt(changingFourTileUpgrade.Multiple)
-                , 0, tileStates.Length - 1)];
-            tile.SetState(state);
+            var tileList = tiles.Where(t=>t.state.number == tileNumberValue).ToList();
+            foreach (var tile in tileList)
+            {
+                TileState state = tileStates[Mathf.Clamp(IndexOf(tile.state) + (int)Mathf.Log(changingFourTileUpgrade.Multiple,2)
+                    , 0, tileStates.Length - 1)];
+                tile.SetState(state);
+            }
         }
-            
     }
+    
     public bool CheckingFourTiles(int numberOfTiles, int tileNumberValue)
     {
         return tiles.Where(t=>t.state.number == tileNumberValue).ToList().Count() == numberOfTiles;
     }
+    public void ChangingFourTilesEventResponse()
+    {
+        IsChangingFourTilesUpgradeEnabled.Value = true;
+        
+    }
+    #endregion
+    
+    
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
+        StoreTileInStack(tiles);
+        
         bool changed = false;
 
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
@@ -138,6 +226,8 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
+            if(IsUnderUpgradeEnabled.Value)
+                MoveCount++;
         }
     }
 

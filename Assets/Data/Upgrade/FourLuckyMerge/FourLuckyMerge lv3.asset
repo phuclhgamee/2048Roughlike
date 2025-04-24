@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: FourLuckyMerge lv3
   m_EditorClassIdentifier: 
   Description: "S\xE1c xu\u1EA5t 40 > 60%\t\t\t"
+  RaisedEvent: {fileID: 11400000, guid: 38cfbc1ca7d32ad48be4ce01d6f9ecdc, type: 2}
   Probability: 60

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "Khi gh\xE9p 4 v\u1EDBi 4, c\xF3 24% kh\u1EA3 n\u0103ng ra \xF4 16
     thay v\xEC 8.\t\t\t\t\t\t\t"
+  RaisedEvent: {fileID: 11400000, guid: 5e3fb24d8721d91489ec6232a1281862, type: 2}
   Probability: 0.24
