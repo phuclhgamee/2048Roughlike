@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c439f441f254548bb2dcdffc6f7b708, type: 3}
+  m_Name: SuperEightGroup
+  m_EditorClassIdentifier: 
+  name: Super Eight
+  Upgrades:
+  - {fileID: 11400000, guid: 11ffc43cdde98214ca9249b45af527ae, type: 2}
+  - {fileID: 11400000, guid: c02ce07408e3be248bc892e22afb8a7e, type: 2}
+  - {fileID: 11400000, guid: 1da851b7f93101e4db82ceb8859d47ac, type: 2}
+  - {fileID: 11400000, guid: 57e2681cb1d74574294e6c12915ea231, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: c4d37aecc3e637345a2313c2ed9ce4cb, type: 2}
+  superEightVariables: {fileID: 11400000, guid: b6282cea72fc9db41814b31b3891d6b6, type: 2}

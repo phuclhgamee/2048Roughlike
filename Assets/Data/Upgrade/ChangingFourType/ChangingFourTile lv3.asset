@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8718ce1e8364761833a429b412d3fd4, type: 3}
   m_Name: ChangingFourTile lv3
   m_EditorClassIdentifier: 
-  Description: 
-  NumberOfTiles: 4
-  TileNumberValue: 8
-  Multiple: 4
+  Description: "4 \xF4 gi\xE1 tr\u1ECB 8"
+  Data:
+    NumberOfTiles: 4
+    TileNumberValue: 8
+    Multiple: 4
+    IsActivated: 1

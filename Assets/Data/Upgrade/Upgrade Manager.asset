@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ae0768e66c48308d4c9b7b1309f75f, type: 3}
   m_Name: Upgrade Manager
   m_EditorClassIdentifier: 
-  upgradeStatusVariable: {fileID: 0}
+  UpgradeGroups:
+  - {fileID: 11400000, guid: 9c0c93a90386cde4fb651fb73eed5754, type: 2}
+  - {fileID: 11400000, guid: a458ed199922665458d3efde05f32d84, type: 2}
+  - {fileID: 11400000, guid: 68822d73e2bb31a4db2b2fec4d89dcde, type: 2}
+  - {fileID: 11400000, guid: ba443b9232759b946885ab16cef55b00, type: 2}
+  - {fileID: 11400000, guid: e963c9616b3298842bb78372637a2bbc, type: 2}

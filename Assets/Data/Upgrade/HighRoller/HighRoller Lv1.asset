@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e897160d1b814495a0e4f597ede9f0df, type: 3}
   m_Name: HighRoller Lv1
   m_EditorClassIdentifier: 
-  Description: 
+  Description: "Gi\xE1 tr\u1ECB \xF4 xu\u1EA5t hi\u1EC7n sau m\u1ED7i l\u01B0\u1EE3t
+    move lu\xF4n l\u1EDBn h\u01A1n ho\u1EB7c b\u1EB1ng 4 (2,4 l\xEAn 4,8)"
   startedNumber: 4

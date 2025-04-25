@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe1317c9adf48e9b09fec0c4c54b7b8, type: 3}
+  m_Name: ChangingFourTileUpgradeGroup
+  m_EditorClassIdentifier: 
+  name: 4-2
+  Upgrades:
+  - {fileID: 11400000, guid: c7db5ef6ccb46104b9158557e658c1f8, type: 2}
+  - {fileID: 11400000, guid: 25bf95da4a989364698db27c60533151, type: 2}
+  - {fileID: 11400000, guid: cd1f0c85109578d4585c0c740ca42eec, type: 2}
+  - {fileID: 11400000, guid: 1f94b2aacaf4a484fb10ee0860ad96f4, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 9668d722efe17fa49b25f828f996f0b3, type: 2}
+  _changingFourTileVariable: {fileID: 11400000, guid: 19d56f4f862e4c84b8db856700761e40, type: 2}

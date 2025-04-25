@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca7cc3988d44c9dbf243387f6e58d71, type: 3}
   m_Name: FourLuckyMerge lv2
   m_EditorClassIdentifier: 
-  Description: "S\xE1c xu\u1EA5t 24 > 40%\t\t\t"
-  RaisedEvent: {fileID: 11400000, guid: fce51bb4ac9a50943a80a5a2260a43a2, type: 2}
-  Probability: 40
+  Description: "S\xE1c xu\u1EA5t 24 > 40%."
+  Probability: 0.4

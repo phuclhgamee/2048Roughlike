@@ -506,7 +506,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1222,6 +1222,7 @@ RectTransform:
   - {fileID: 1637414566}
   - {fileID: 1967249910}
   - {fileID: 991012070}
+  - {fileID: 1669357267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1373,10 +1374,6 @@ GameObject:
   m_Component:
   - component: {fileID: 997205596}
   - component: {fileID: 997205597}
-  - component: {fileID: 997205598}
-  - component: {fileID: 997205600}
-  - component: {fileID: 997205601}
-  - component: {fileID: 997205602}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -1437,129 +1434,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19b4310b755bd894a999f0202d2f671d, type: 2}
   - {fileID: 11400000, guid: 0a300fade7d43e94abe37c35dc38c0d9, type: 2}
   - {fileID: 11400000, guid: 1be54a437c57bd940a0bc02aae22d9be, type: 2}
-  HighRollerEvent: {fileID: 11400000, guid: 488ac33592f8b0b4c8244e28d1d61663, type: 2}
-  ChangingFourTileEvent: {fileID: 11400000, guid: e270d19b999dd0f40bd7550491bcd27e, type: 2}
-  UnderEvent: {fileID: 11400000, guid: 85cc3bb5c3e475640a348dfa31526929, type: 2}
+  upgradeManager: {fileID: 11400000, guid: 0d81b124379a7394b92d509ee3561e0f, type: 2}
   FourLuckyMergeProbability: {fileID: 11400000, guid: 3306921d796993848b1f2846c5406dd4, type: 2}
   SuperEightProbability: {fileID: 11400000, guid: b6282cea72fc9db41814b31b3891d6b6, type: 2}
   HighRollerState: {fileID: 11400000, guid: d898f809705e9634e8878c9500d3af4c, type: 2}
-  IsUnderUpgradeEnabled: {fileID: 11400000, guid: 0e75519e46897474c8a22e1e97568d66, type: 2}
-  IsChangingFourTilesUpgradeEnabled: {fileID: 11400000, guid: 19d56f4f862e4c84b8db856700761e40, type: 2}
-  HighRollerUpgradeGroups: {fileID: 11400000, guid: 68822d73e2bb31a4db2b2fec4d89dcde, type: 2}
-  ChangingFourTilesUpgradeGroups: {fileID: 11400000, guid: 1a4d9cef63eeb5849b9a9dcfbbbeae16, type: 2}
+  UnderUpgradeStat: {fileID: 11400000, guid: 7cc24c23a5c34f14e9c73330f01d6a55, type: 2}
+  ChangingFourTileStat: {fileID: 11400000, guid: 19d56f4f862e4c84b8db856700761e40, type: 2}
   UnderButton: {fileID: 1007135735}
---- !u!114 &997205598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997205595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: 488ac33592f8b0b4c8244e28d1d61663, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 997205597}
-        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
-        m_MethodName: SetStateByNumber
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &997205600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997205595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: 85cc3bb5c3e475640a348dfa31526929, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 997205597}
-        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
-        m_MethodName: UnderEventResponse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &997205601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997205595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 615f03a4416c46979e6c367338c81de7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: 0e75519e46897474c8a22e1e97568d66, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 997205597}
-        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
-        m_MethodName: EnableUnderButton
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &997205602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997205595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: e270d19b999dd0f40bd7550491bcd27e, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 997205597}
-        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
-        m_MethodName: ChangingFourTilesEventResponse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1007135733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1505,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1638,14 +1519,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1007135736}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997205597}
         m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
-        m_MethodName: UnderEventResponse
+        m_MethodName: OnClickUnderButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2194,8 +2075,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1601929140}
   - component: {fileID: 1601929139}
-  - component: {fileID: 1601929141}
-  - component: {fileID: 1601929142}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2219,12 +2098,6 @@ MonoBehaviour:
   gameOver: {fileID: 1186592820}
   scoreText: {fileID: 791552736}
   hiscoreText: {fileID: 67294057}
-  FourLuckyMergeEvent: {fileID: 11400000, guid: 5e3fb24d8721d91489ec6232a1281862, type: 2}
-  SuperEightEvent: {fileID: 11400000, guid: 7e1d838e04c422643b8b6c470cf98807, type: 2}
-  FourLuckyMergeProbability: {fileID: 11400000, guid: 3306921d796993848b1f2846c5406dd4, type: 2}
-  FourLuckeyMergeGroup: {fileID: 11400000, guid: 41cd138aa93201047b5943b7d2981e2d, type: 2}
-  SuperEightProbability: {fileID: 11400000, guid: b6282cea72fc9db41814b31b3891d6b6, type: 2}
-  SuperEightGroup: {fileID: 11400000, guid: f0d6c36b8f761d140975172f8d4d3190, type: 2}
 --- !u!4 &1601929140
 Transform:
   m_ObjectHideFlags: 0
@@ -2240,62 +2113,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1601929141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601929138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: 5e3fb24d8721d91489ec6232a1281862, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1601929139}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ListenEventFourLuckyMerge
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1601929142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601929138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9640d1752dd3463f909c61a671d9562e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseEvent: {fileID: 11400000, guid: 7e1d838e04c422643b8b6c470cf98807, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1601929139}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ListenEventSuperEight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1637414565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2216,123 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637414565}
+  m_CullTransparentMesh: 1
+--- !u!1 &1669357266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669357267}
+  - component: {fileID: 1669357271}
+  - component: {fileID: 1669357270}
+  - component: {fileID: 1669357269}
+  - component: {fileID: 1669357268}
+  m_Layer: 5
+  m_Name: DebugPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1669357267
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669357266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 932753464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.9998, y: 510.81885}
+  m_SizeDelta: {x: 502, y: 252.7167}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1669357268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669357266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3000401f0f8b44aeb27214c84bbe34de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeManager: {fileID: 11400000, guid: 0d81b124379a7394b92d509ee3561e0f, type: 2}
+  upgradeColumnPrefab: {fileID: 6811454631653380595, guid: 7e3ec816641c91b429542bbdf49fdf05, type: 3}
+--- !u!114 &1669357269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669357266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1669357270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669357266}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.21960784}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1669357271
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669357266}
   m_CullTransparentMesh: 1
 --- !u!1 &1761606469
 GameObject:

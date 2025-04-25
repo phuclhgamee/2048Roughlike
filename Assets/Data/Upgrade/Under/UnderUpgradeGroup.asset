@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41406c0e40a0410d933e4e19f60b27cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9211d9b533d34b029f6710537ab1ccbd, type: 3}
   m_Name: UnderUpgradeGroup
   m_EditorClassIdentifier: 
+  name: Under
   Upgrades:
   - {fileID: 11400000, guid: 6feb0b433ed7fa745ab19fdfcf01b1bb, type: 2}
   - {fileID: 11400000, guid: d36d0f9cb38e9f649b7d7583f90672e4, type: 2}
   - {fileID: 11400000, guid: 5e72dc6318502064a8171b31437bd2e4, type: 2}
   Type: 0
+  LevelStatus: {fileID: 11400000, guid: 471bbabf5e821bd44b9da11420822a19, type: 2}
+  _underVariable: {fileID: 11400000, guid: 7cc24c23a5c34f14e9c73330f01d6a55, type: 2}

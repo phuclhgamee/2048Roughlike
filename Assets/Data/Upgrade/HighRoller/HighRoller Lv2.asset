@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e897160d1b814495a0e4f597ede9f0df, type: 3}
   m_Name: HighRoller Lv2
   m_EditorClassIdentifier: 
-  Description: 
+  Description: '4>8 '
   startedNumber: 8

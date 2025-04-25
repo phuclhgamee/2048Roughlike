@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ced2c625523d24493389d6f71ffa41, type: 3}
   m_Name: UnderUpgrade Lv2
   m_EditorClassIdentifier: 
-  Description: 
-  GoBackTurns: 4
-  CoolDownTurns: 6
+  Description: "4 (6 \u0111\u1EC3 h\u1ED3i)"
+  Data:
+    GoBackTurns: 4
+    CoolDownTurns: 6
+    IsActivated: 1

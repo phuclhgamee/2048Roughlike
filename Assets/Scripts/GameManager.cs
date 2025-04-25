@@ -15,15 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
     
-    [Header("Event")]
-    [SerializeField] private Event FourLuckyMergeEvent;
-    [SerializeField] private Event SuperEightEvent;
-
-    [Header("Stats")] 
-    [SerializeField] private FloatVariable FourLuckyMergeProbability;
-    [SerializeField] private UpgradeGroup FourLuckeyMergeGroup;
-    [SerializeField] private FloatVariable SuperEightProbability;
-    [SerializeField] private UpgradeGroup SuperEightGroup;
     public int score { get; private set; } = 0;
 
     private void Awake()
@@ -63,19 +54,6 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.enabled = true;
         
-        // FourLuckyMergeEvent.Raise();
-        // SuperEightEvent.Raise();
-    }
-    
-    public void ListenEventFourLuckyMerge()
-    {
-        FourLuckyMergeUpgrade fourLuckyMerge =(FourLuckyMergeUpgrade) FourLuckeyMergeGroup.Upgrades[0];
-        FourLuckyMergeProbability.Value = fourLuckyMerge.Probability;
-    }
-    public void ListenEventSuperEight()
-    {
-        SuperEightUpgrade superEight =(SuperEightUpgrade) SuperEightGroup.Upgrades[0];
-        SuperEightProbability.Value = superEight.Probability;
     }
     public void GameOver()
     {

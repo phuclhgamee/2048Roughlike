@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0406523123ca2f4594f6e6d080c096a, type: 3}
   m_Name: SuperEight lv2
   m_EditorClassIdentifier: 
-  Description: 
+  Description: "S\xE1c xu\u1EA5t 16 > 24%"
   Probability: 0.24
