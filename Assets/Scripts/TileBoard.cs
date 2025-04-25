@@ -24,6 +24,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private TileStateVariables HighRollerState;
     [SerializeField] private UnderVariable UnderUpgradeStat;
     [SerializeField] private ChangingFourTileVariable ChangingFourTileStat;
+    [SerializeField] private FirstDeathVariable FirstDeathStat;
     
     [Header("UI")]
     [SerializeField] private Button UnderButton;
@@ -57,18 +58,7 @@ public class TileBoard : MonoBehaviour
 
     }
     
-    public void ClearBoard()
-    {
-        foreach (var cell in grid.cells) {
-            cell.tile = null;
-        }
-
-        foreach (var tile in tiles) {
-            Destroy(tile.gameObject);
-        }
-
-        tiles.Clear();
-    }
+    
     
     public void CreateTile()
     {
@@ -182,7 +172,77 @@ public class TileBoard : MonoBehaviour
     }
     #endregion
     
-    
+    #region FirstDeathEvent
+
+    private void UseFirstDeathUpgrade()
+    {
+        if (FirstDeathStat.Value.IsActivated && CheckForGameOver())
+        {
+            DestroyAllExceptForBiggestAndSmallest();
+            FirstDeathStat.Value = new FirstDeathUpgradeData(false);
+        }
+    }
+
+    private void DestroyAllExceptForBiggestAndSmallest()
+    {
+        Tile biggestTile = GetBiggestTile();
+        Tile smallestTile = GetSmallestTile();
+        
+        foreach (var cell in grid.cells) 
+        {
+            if (cell.tile != biggestTile && cell.tile != smallestTile)
+            {
+                cell.tile = null;
+            }
+        }
+        foreach (var tile in tiles) {
+            if (tile != biggestTile && tile != smallestTile)
+            {
+                Tile t = tile;
+                tiles.Remove(tile);
+                Destroy(t.gameObject);
+            }
+        }
+        
+    }
+
+    private Tile GetBiggestTile()
+    {
+        Tile tile = tiles[0];
+        foreach (var t in tiles) 
+        {
+            if (t.state.number > tile.state.number)
+            {
+                tile = t;
+            }
+        }
+        return tile;
+    }
+    private Tile GetSmallestTile()
+    {
+        Tile tile = tiles[0];
+        foreach (var t in tiles) 
+        {
+            if (t.state.number < tile.state.number)
+            {
+                tile = t;
+            }
+        }
+        return tile;
+    }
+    public void ClearBoard()
+    {
+        foreach (var cell in grid.cells) {
+            cell.tile = null;
+        }
+
+        foreach (var tile in tiles) {
+            Destroy(tile.gameObject);
+        }
+
+        tiles.Clear();
+    }
+    #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         StoreTileInStack(tiles);
@@ -206,7 +266,7 @@ public class TileBoard : MonoBehaviour
             MoveCount++;
         }
     }
-
+    
     private bool MoveTile(Tile tile, Vector2Int direction)
     {
         TileCell newCell = null;
@@ -310,32 +370,33 @@ public class TileBoard : MonoBehaviour
         if (tiles.Count != grid.Size) {
             return false;
         }
-
+        
         foreach (var tile in tiles)
         {
             TileCell up = grid.GetAdjacentCell(tile.cell, Vector2Int.up);
             TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
             TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
             TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
-
+        
             if (up != null && CanMerge(tile, up.tile)) {
                 return false;
             }
-
+        
             if (down != null && CanMerge(tile, down.tile)) {
                 return false;
             }
-
+        
             if (left != null && CanMerge(tile, left.tile)) {
                 return false;
             }
-
+        
             if (right != null && CanMerge(tile, right.tile)) {
                 return false;
             }
         }
 
         return true;
+        
     }
 
 }
