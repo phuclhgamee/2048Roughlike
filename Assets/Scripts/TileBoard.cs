@@ -90,16 +90,16 @@ public class TileBoard : MonoBehaviour
         if (waiting) return;
         if (CheckForGameOver()) return;
         
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)||InputManager.SwipeUp()) {
             Move(Vector2Int.up, 0, 1, 1, 1);
             
-        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
+        } else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)||InputManager.SwipeLeft()) {
             Move(Vector2Int.left, 1, 1, 0, 1);
             
-        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
+        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)||InputManager.SwipeDown()) {
             Move(Vector2Int.down, 0, 1, grid.Height - 2, -1);
             
-        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
+        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)||InputManager.SwipeRight()) {
             Move(Vector2Int.right, grid.Width - 2, -1, 0, 1);
         }
 
