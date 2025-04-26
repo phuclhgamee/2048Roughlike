@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a2e5f51bd143b8a378bfb96430a5ab, type: 3}
   m_Name: FirstDeathUpgrade
   m_EditorClassIdentifier: 
-  Description: 
+  Description: "Khi b\u1EA1n thua l\u1EA7n \u0111\u1EA7u, ph\xE1 h\u1EE7y to\xE0n
+    b\u1ED9 \xF4 tr\xEAn b\xE0n ch\u1EC9 \u0111\u1EC3 l\u1EA1i s\u1ED1 l\u1EDBn nh\u1EA5t
+    v\xE0 b\xE9 nh\u1EA5t"
   Data:
-    IsActivated: 0
+    IsActivated: 1

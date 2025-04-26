@@ -14,6 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup gameOver;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
+    [SerializeField] private TextMeshProUGUI RemainedMovesText;
+    [SerializeField] private CanvasGroup UpgradeUI;
+    
+    [Header("Stats")]
+    [SerializeField] private IntegerVariable TargetMoves;
+    [SerializeField] private IntegerVariable RemainingMoves;
+    [SerializeField] private BooleanVariable IsUpgradeUIActive;
+    
+    [Header("Events")] 
+    [SerializeField] private Event OpenUpgradeUIEvent;
     
     public int score { get; private set; } = 0;
 
@@ -47,13 +57,12 @@ public class GameManager : MonoBehaviour
         // hide game over screen
         gameOver.alpha = 0f;
         gameOver.interactable = false;
-
         // update board state
         board.ClearBoard();
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
-        
+        //OpenUpgradeUI();
     }
     public void GameOver()
     {
@@ -108,4 +117,38 @@ public class GameManager : MonoBehaviour
         return PlayerPrefs.GetInt("hiscore", 0);
     }
 
+    public void CheckingOpenUpgradeUI(int upgradeMoveCount, int targetMove)
+    {
+        if (upgradeMoveCount >= targetMove)
+        {
+            OpenUpgradeUI();
+            upgradeMoveCount = 0;
+        }
+    }
+
+    public void CloseUpgradeUI()
+    {
+        StartCoroutine(Fade(UpgradeUI, 0f, 1f));
+        UpgradeUI.interactable = false;
+        UpgradeUI.gameObject.SetActive(false);
+    }
+
+    public void OpenUpgradeUI()
+    {
+        UpgradeUI.gameObject.SetActive(true);
+        StartCoroutine(Fade(UpgradeUI, 1f, 0.3f));
+        UpgradeUI.interactable = true;
+    }
+
+    public void SetRemainUpgradeText(int remainStep)
+    {
+        RemainedMovesText.text = $"Next upgrade: {RemainingMoves.Value} moves ";
+        if (RemainingMoves.Value == 0)
+        {
+            OpenUpgradeUIEvent.Raise();
+            IsUpgradeUIActive.Value = true;
+        }
+    }
+
+    
 }

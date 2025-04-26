@@ -26,6 +26,16 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private ChangingFourTileVariable ChangingFourTileStat;
     [SerializeField] private FirstDeathVariable FirstDeathStat;
     
+    [Space] 
+    [SerializeField] private IntegerVariable TargetMoves;
+    [SerializeField] private IntegerVariable RemainingMoves;
+    [SerializeField] private IntegerVariable NumberOfUpgradeSelected;
+    [SerializeField] private BooleanVariable IsUpgradeUIActive;
+    
+    [Header("Events")] 
+    [SerializeField] private Event OpenUpgradeUIEvent;
+    [SerializeField] private Event OnChoosingUpgradeEvent;
+    
     [Header("UI")]
     [SerializeField] private Button UnderButton;
     
@@ -33,19 +43,19 @@ public class TileBoard : MonoBehaviour
     private List<Tile> tiles;
     private bool waiting;
     private Stack<List<StoredTile>> tilesStack;
-    private int moveCount = 0;
-    public int MoveCount
+    private int underMoveCount = 0;
+    
+    public int UnderMoveCount
     {
-        get { return moveCount; }
+        get { return underMoveCount; }
         set
         {
-            moveCount = value;
+            underMoveCount = value;
             UnderButton.interactable = false;
-            if (moveCount >= 4)
+            if (underMoveCount >= UnderUpgradeStat.Value.CoolDownTurns)
             {
                 UnderButton.interactable = true;
             }
-            
         }
     }
     
@@ -55,10 +65,8 @@ public class TileBoard : MonoBehaviour
         tiles = new List<Tile>(16);
         tilesStack = new Stack<List<StoredTile>>();
         HighRollerState.Value = tileStates[0];
-
+        RemainingMoves.Value = 10;
     }
-    
-    
     
     public void CreateTile()
     {
@@ -79,6 +87,7 @@ public class TileBoard : MonoBehaviour
     {
         if (waiting) return;
         if (CheckForGameOver()) return;
+        if (IsUpgradeUIActive.Value) return;
         
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)||InputManager.SwipeUp()) {
             Move(Vector2Int.up, 0, 1, 1, 1);
@@ -119,7 +128,7 @@ public class TileBoard : MonoBehaviour
     public void OnClickUnderButton()
     {
         var popedTiles = new List<StoredTile>();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < UnderUpgradeStat.Value.GoBackTurns; i++)
         {
             popedTiles.Clear();
             popedTiles = tilesStack.Pop();
@@ -131,7 +140,7 @@ public class TileBoard : MonoBehaviour
             Tile tile = new Tile(storedTile);
             CreateTile(tile);
         }
-        MoveCount = 0;
+        UnderMoveCount = 0;
         
     }
     #endregion
@@ -263,7 +272,8 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
-            MoveCount++;
+            UnderMoveCount++;
+            RemainingMoves.Value--;
         }
     }
     
@@ -397,6 +407,28 @@ public class TileBoard : MonoBehaviour
 
         return true;
         
+    }
+    
+    public void SetNumberOfUpgradeSelected(int value)
+    {
+        if (NumberOfUpgradeSelected.Value >= Const.UpgradeSelectsToIncreaseTargetMove)
+        {
+            NumberOfUpgradeSelected.Value = 0;
+            TargetMoves.Value += Const.TargetMoveIncreaseAmount;
+        }
+    }
+
+    public void ChoosingUpgradeEventRespone()
+    {
+        NumberOfUpgradeSelected.Value++;
+        RemainingMoves.Value = TargetMoves.Value;
+        StartCoroutine(IEWaitForUpgradeUIInactive());
+    }
+    
+    IEnumerator IEWaitForUpgradeUIInactive()
+    {
+        yield return new WaitForSeconds(1f);
+        IsUpgradeUIActive.Value = false;
     }
 
 }

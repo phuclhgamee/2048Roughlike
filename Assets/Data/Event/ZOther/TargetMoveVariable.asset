@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60eed2af03274bd898c45052eeace2dd, type: 3}
-  m_Name: FirstDeathVariable
+  m_Script: {fileID: 11500000, guid: 83ae80d316a540d78c5ee1917f17de24, type: 3}
+  m_Name: TargetMoveVariable
   m_EditorClassIdentifier: 
-  initializeValue:
-    IsActivated: 0
+  initializeValue: 10
   isSavable: 0
   isRaiseEvent: 0

@@ -33,6 +33,10 @@ namespace Roughlike2048
             
         }
 
+        public Sprite GetNextLevelIcon()
+        {
+            return Upgrades[LevelStatus.Value].Icon;
+        }
         public virtual void ListenEvent()
         {
             LevelStatus.Value = Mathf.Clamp(LevelStatus.Value + 1, 0, Upgrades.Length);

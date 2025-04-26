@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60eed2af03274bd898c45052eeace2dd, type: 3}
-  m_Name: FirstDeathVariable
+  m_Script: {fileID: 11500000, guid: 6e8d3994685a48adaa9ad6faa97a8ad5, type: 3}
+  m_Name: CloseUpgradeUIEvent
   m_EditorClassIdentifier: 
-  initializeValue:
-    IsActivated: 0
-  isSavable: 0
-  isRaiseEvent: 0

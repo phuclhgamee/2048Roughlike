@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: FirstDeathUpgradeGroup
   m_EditorClassIdentifier: 
   name: 
-  Upgrades: []
+  Upgrades:
+  - {fileID: 11400000, guid: e35ae0d9173aaf746a5ff70c1cd1eb6f, type: 2}
   Type: 0
-  LevelStatus: {fileID: 0}
-  firstDeathVariable: {fileID: 0}
+  LevelStatus: {fileID: 11400000, guid: 7f280983399a0894c917bd1d9a7f7372, type: 2}
+  firstDeathVariable: {fileID: 11400000, guid: 1b90f5c92cb0610408cebeebe7fbfe34, type: 2}
