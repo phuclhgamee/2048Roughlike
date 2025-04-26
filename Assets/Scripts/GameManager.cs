@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
-        //OpenUpgradeUI();
+        
+        OpenUpgradeUIEvent.Raise();
     }
     public void GameOver()
     {
@@ -138,6 +139,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.gameObject.SetActive(true);
         StartCoroutine(Fade(UpgradeUI, 1f, 0.3f));
         UpgradeUI.interactable = true;
+        IsUpgradeUIActive.Value = true;
     }
 
     public void SetRemainUpgradeText(int remainStep)
@@ -146,7 +148,6 @@ public class GameManager : MonoBehaviour
         if (RemainingMoves.Value == 0)
         {
             OpenUpgradeUIEvent.Raise();
-            IsUpgradeUIActive.Value = true;
         }
     }
 

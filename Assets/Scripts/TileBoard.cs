@@ -132,6 +132,7 @@ public class TileBoard : MonoBehaviour
         {
             popedTiles.Clear();
             popedTiles = tilesStack.Pop();
+            RemainingMoves.Value++;
         }
         ClearBoard();
         
@@ -427,7 +428,7 @@ public class TileBoard : MonoBehaviour
     
     IEnumerator IEWaitForUpgradeUIInactive()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.05f);
         IsUpgradeUIActive.Value = false;
     }
 
