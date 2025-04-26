@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ChangingFourTile lv3
   m_EditorClassIdentifier: 
   Description: "4 \xF4 gi\xE1 tr\u1ECB 8"
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
     NumberOfTiles: 4
     TileNumberValue: 8

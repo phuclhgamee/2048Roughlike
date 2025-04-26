@@ -12,6 +12,9 @@ namespace Roughlike2048
         [SerializeField] private TextMeshProUGUI Description;
         [SerializeField] private TextMeshProUGUI Name;
         [SerializeField] private Button button;
+        [SerializeField] private Transform starGroupPanel;
+        [SerializeField] private GameObject activeStar;
+        [SerializeField] private GameObject inactiveStar;
         [Space]
         [SerializeField] private Event.Event CloseUpgradeUIEvent;
         [SerializeField] private Event.Event OnChoosingUpgradeEvent;
@@ -24,8 +27,30 @@ namespace Roughlike2048
             Description.text = group.GetNextLevelDescription();
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(()=>ButtonOnClick(group));
+            ClearStarPanel();
+            if (group.Upgrades.Length > 1)
+            {
+                for (int i = 0; i < group.Upgrades.Length; i++)
+                {
+                    if (i < group.LevelStatus.Value)
+                    {
+                        Instantiate(activeStar, starGroupPanel);
+                    }
+                    else
+                    {
+                        Instantiate(inactiveStar, starGroupPanel);
+                    }
+                }
+            }
         }
-        
+
+        private void ClearStarPanel()
+        {
+            foreach (Transform child in starGroupPanel)
+            {
+                Destroy(child.gameObject);
+            }
+        }
         public void ButtonOnClick(UpgradeGroup group)
         {
             group.ListenEvent();

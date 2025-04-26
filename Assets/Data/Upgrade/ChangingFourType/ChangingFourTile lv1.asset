@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "N\u1EBFu tr\xEAn s\xE2n t\u1ED3n t\u1EA1i 4 \xF4 gi\xE1 tr\u1ECB
     2, ch\xFAng l\u1EADp t\u1EE9c \u0111\u01B0\u1EE3c X4 gi\xE1 tr\u1ECB"
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
     NumberOfTiles: 4
     TileNumberValue: 2

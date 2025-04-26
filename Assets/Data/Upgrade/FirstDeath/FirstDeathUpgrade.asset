@@ -15,5 +15,6 @@ MonoBehaviour:
   Description: "Khi b\u1EA1n thua l\u1EA7n \u0111\u1EA7u, ph\xE1 h\u1EE7y to\xE0n
     b\u1ED9 \xF4 tr\xEAn b\xE0n ch\u1EC9 \u0111\u1EC3 l\u1EA1i s\u1ED1 l\u1EDBn nh\u1EA5t
     v\xE0 b\xE9 nh\u1EA5t"
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
     IsActivated: 1

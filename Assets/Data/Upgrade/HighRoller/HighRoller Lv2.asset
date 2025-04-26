@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: HighRoller Lv2
   m_EditorClassIdentifier: 
   Description: '4>8 '
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   startedNumber: 8

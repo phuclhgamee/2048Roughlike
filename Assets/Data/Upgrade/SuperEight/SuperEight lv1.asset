@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "Khi gh\xE9p 8 v\u1EDBi 8, c\xF3 16% kh\u1EA3 n\u0103ng ra \xF4 32
     thay v\xEC 16.\t"
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Probability: 0.16

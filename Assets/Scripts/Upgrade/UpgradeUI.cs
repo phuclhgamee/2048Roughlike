@@ -10,7 +10,7 @@ namespace Roughlike2048
     {
         [SerializeField] private UpgradeManager upgradeManager;
         [SerializeField] private UpgradeItemUI upgradeItemUIPrefab;
-        
+        [SerializeField] private Transform horizontalLayout;
         private void Awake()
         {
             upgradeManager.Initialize();
@@ -26,7 +26,7 @@ namespace Roughlike2048
             var randomAvailableUpgrades = upgradeManager.GetRandomUpgradeGroups(Const.NumberOfRandomSkill);
             foreach (UpgradeGroup upgrade in randomAvailableUpgrades)
             {
-                GameObject column = Instantiate(upgradeItemUIPrefab.gameObject, transform);
+                GameObject column = Instantiate(upgradeItemUIPrefab.gameObject, horizontalLayout);
                 UpgradeItemUI itemComponent= column.GetComponent<UpgradeItemUI>();
                 if (itemComponent)
                 {
@@ -37,7 +37,7 @@ namespace Roughlike2048
 
         private void ClearAllChildren()
         {
-            foreach (Transform child in transform)
+            foreach (Transform child in horizontalLayout)
             {
                 Destroy(child.gameObject);
             }
