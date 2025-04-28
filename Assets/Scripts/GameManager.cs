@@ -71,8 +71,9 @@ public class GameManager : MonoBehaviour
 
     public void Replay()
     {
-        NewGame();
         upgradeManager.ReplayUpgradeReset();
+        board.MoveReplayReset();
+        NewGame();
     }
     public void GameOver()
     {
@@ -159,6 +160,7 @@ public class GameManager : MonoBehaviour
             OpenUpgradeUIEvent.Raise();
         }
     }
+
     
     
 }

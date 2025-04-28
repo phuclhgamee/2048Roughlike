@@ -661,7 +661,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1601929139}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: NewGame
+        m_MethodName: Replay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1512,6 +1512,7 @@ GameObject:
   - component: {fileID: 997205598}
   - component: {fileID: 997205599}
   - component: {fileID: 997205600}
+  - component: {fileID: 997205601}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -1662,6 +1663,34 @@ MonoBehaviour:
       - m_Target: {fileID: 997205597}
         m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
         m_MethodName: FirstDeathEventResponse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &997205601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997205595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1ed26278c44dc1800bd8a2293d360e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseEvent: {fileID: 11400000, guid: 7cc24c23a5c34f14e9c73330f01d6a55, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997205597}
+        m_TargetAssemblyTypeName: TileBoard, Assembly-CSharp
+        m_MethodName: EnableUnderButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

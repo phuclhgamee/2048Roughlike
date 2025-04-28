@@ -425,6 +425,15 @@ public class TileBoard : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         IsUpgradeUIActive.Value = false;
     }
-    
+
+    public void MoveReplayReset()
+    {
+        UnderMoveCount = 0;
+        RemainingMoves.Reset();
+        TargetMoves.Reset();
+        NumberOfUpgradeSelected.Reset();
+        IsUpgradeUIActive.Reset();
+        EnableUnderButton();
+    }
 
 }
