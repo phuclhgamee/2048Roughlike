@@ -26,6 +26,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private ChangingFourTileVariable ChangingFourTileStat;
     [SerializeField] private FirstDeathVariable FirstDeathStat;
     [SerializeField] private HighRiskHighRewardVariable HighRiskHighRewardStat;
+    [SerializeField] private Merge2048Variable Merge2048Stat;
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
@@ -59,7 +60,20 @@ public class TileBoard : MonoBehaviour
             }
         }
     }
-    
+
+    private int biggestTileValue = 2;
+    public int BiggestTileValue
+    {
+        get
+        {
+            if (GetBiggestTile().state.number != biggestTileValue)
+            {
+                
+            }
+            biggestTileValue = GetBiggestTile().state.number;
+            return GetBiggestTile().state.number;
+        } 
+    }
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -340,8 +354,15 @@ public class TileBoard : MonoBehaviour
 
         int index = GetMergeTileIndex(a, b);
         TileState newState = tileStates[index];
-
+        
         b.SetState(newState);
+        //Merge2048
+        if (newState.number == Merge2048Stat.Value.MergeValue)
+        {
+            
+            Tile tile = new Tile(grid.GetRandomEmptyCell(),newState);
+            CreateTile(tile);
+        }
         GameManager.Instance.IncreaseScore(newState.number);
     }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,11 @@ public class Tile : MonoBehaviour
     private Image background;
     private TextMeshProUGUI text;
 
+    public Tile(TileCell cell, TileState state)
+    {
+        this.cell = cell;
+        this.state = state;
+    }
     public Tile(StoredTile storedTile)
     {
         this.state = storedTile.state;

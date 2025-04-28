@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeab80d624174dbebe4f97e4148675d1, type: 3}
+  m_Name: Merge2048UpgradeGroup
+  m_EditorClassIdentifier: 
+  name: 
+  Upgrades:
+  - {fileID: 11400000, guid: c1419a6d3de1ec647b683f31170d9090, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 62dec49bb7797c74da1859b60ee44533, type: 2}
+  _merge2048Variable: {fileID: 11400000, guid: 16ebb344afa12d44fa4c6f2c739fc22c, type: 2}

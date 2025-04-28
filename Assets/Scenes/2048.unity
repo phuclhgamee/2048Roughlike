@@ -1581,6 +1581,7 @@ MonoBehaviour:
   ChangingFourTileStat: {fileID: 11400000, guid: 19d56f4f862e4c84b8db856700761e40, type: 2}
   FirstDeathStat: {fileID: 11400000, guid: 1b90f5c92cb0610408cebeebe7fbfe34, type: 2}
   HighRiskHighRewardStat: {fileID: 11400000, guid: 350a2f86640cb894dbac7d715bb4d044, type: 2}
+  Merge2048Stat: {fileID: 11400000, guid: 16ebb344afa12d44fa4c6f2c739fc22c, type: 2}
   TargetMoves: {fileID: 11400000, guid: e4f779520d60d594e8417e15858f38f3, type: 2}
   RemainingMoves: {fileID: 11400000, guid: 5c9a17955ff8a61418052095b1473096, type: 2}
   NumberOfUpgradeSelected: {fileID: 11400000, guid: 5632878a89f241d49bf0a37ae4b59afd, type: 2}
