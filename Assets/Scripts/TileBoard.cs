@@ -239,6 +239,31 @@ public class TileBoard : MonoBehaviour
         tiles.Clear();
     }
     #endregion
+    
+    #region HighRiskHighRewardEvent
+
+    public bool IsInCorner(Tile tile)
+    {
+        if (tile.cell.coordinates == Vector2Int.zero || tile.cell.coordinates == new Vector2Int(0, 3) ||
+            tile.cell.coordinates == new Vector2Int(3, 3) || tile.cell.coordinates == new Vector2Int(3, 0))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    public bool IsBiggestTileInCorner()
+    {
+        if (GetBiggestTile().state.number >= HighRiskHighRewardStat.Value.BiggsetValueToTrigger
+            && IsInCorner(GetBiggestTile()))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
         StoreTileInStack(tiles);
@@ -259,8 +284,16 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
-            UnderMoveCount++;
-            RemainingMoves.Value--;
+            if (IsBiggestTileInCorner() && HighRiskHighRewardStat.Value.IsActivated)
+            {
+                UnderMoveCount += HighRiskHighRewardStat.Value.Move;
+                RemainingMoves.Value -= HighRiskHighRewardStat.Value.Move;
+            }
+            else
+            {
+                UnderMoveCount++;
+                RemainingMoves.Value--;
+            }
         }
     }
     

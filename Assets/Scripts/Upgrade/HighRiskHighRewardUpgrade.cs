@@ -11,6 +11,7 @@ namespace Roughlike2048
     [Serializable]
     public class HighRiskHighRewardUpgradeData
     {
+        public bool IsActivated;
         public int BiggsetValueToTrigger;
         public int Move;
     }

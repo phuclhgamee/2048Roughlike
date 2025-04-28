@@ -1580,7 +1580,7 @@ MonoBehaviour:
   UnderUpgradeStat: {fileID: 11400000, guid: 7cc24c23a5c34f14e9c73330f01d6a55, type: 2}
   ChangingFourTileStat: {fileID: 11400000, guid: 19d56f4f862e4c84b8db856700761e40, type: 2}
   FirstDeathStat: {fileID: 11400000, guid: 1b90f5c92cb0610408cebeebe7fbfe34, type: 2}
-  HighRiskHighRewardStat: {fileID: 0}
+  HighRiskHighRewardStat: {fileID: 11400000, guid: 350a2f86640cb894dbac7d715bb4d044, type: 2}
   TargetMoves: {fileID: 11400000, guid: e4f779520d60d594e8417e15858f38f3, type: 2}
   RemainingMoves: {fileID: 11400000, guid: 5c9a17955ff8a61418052095b1473096, type: 2}
   NumberOfUpgradeSelected: {fileID: 11400000, guid: 5632878a89f241d49bf0a37ae4b59afd, type: 2}
