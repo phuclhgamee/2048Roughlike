@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Roughlike2048.Event;
 using UnityEngine;
 
@@ -10,8 +11,8 @@ namespace Roughlike2048
     {
         [SerializeField] public UpgradeGroup[] UpgradeGroups;
         
-        [HideInInspector] public List<UpgradeGroup> currentUpgradeGroups;
-        [HideInInspector] public List<UpgradeGroup> availableUpgradeGroups;
+        public List<UpgradeGroup> currentUpgradeGroups;
+        public List<UpgradeGroup> availableUpgradeGroups;
 
         public void Initialize()
         {
@@ -19,10 +20,6 @@ namespace Roughlike2048
             availableUpgradeGroups = new List<UpgradeGroup>(UpgradeGroups);
         }
         
-        public void RaiseEventForGroup(UpgradeGroup group)
-        {
-            
-        }
 
         public List<UpgradeGroup> GetRandomUpgradeGroups(int numberOfGroups)
         {
@@ -32,9 +29,28 @@ namespace Roughlike2048
                 .ToList();
         }
 
-        public void SelectSkill(UpgradeGroup group)
+        public void UpgradeAvailableGroup()
+        {
+            foreach (UpgradeGroup group in UpgradeGroups)
+            {
+                if (group.IsGettingMaxLevel)
+                {
+                    availableUpgradeGroups.Remove(group);
+                }
+            }
+        }
+        public void SelectUpgrade(UpgradeGroup group)
         {
             
+        }
+
+        public void ReplayUpgradeReset()
+        {
+            Initialize();
+            foreach (UpgradeGroup group in UpgradeGroups)
+            {
+                group.ReplayReset();
+            }
         }
     }
 }

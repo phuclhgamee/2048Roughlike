@@ -14,5 +14,10 @@ namespace Roughlike2048
             FirstDeathUpgrade firstDeathUpgrade = (FirstDeathUpgrade)upgrade;
             firstDeathVariable.Value = firstDeathUpgrade.Data;
         }
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            firstDeathVariable.Reset();
+        }
     }
 }

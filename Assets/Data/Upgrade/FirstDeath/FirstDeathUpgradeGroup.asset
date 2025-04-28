@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2414c0c552441268d8e0be89136a448, type: 3}
   m_Name: FirstDeathUpgradeGroup
   m_EditorClassIdentifier: 
-  name: 
+  name: First Death
   Upgrades:
   - {fileID: 11400000, guid: e35ae0d9173aaf746a5ff70c1cd1eb6f, type: 2}
   Type: 0

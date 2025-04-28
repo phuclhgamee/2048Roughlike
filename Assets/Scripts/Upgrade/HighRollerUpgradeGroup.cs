@@ -15,5 +15,11 @@ namespace Roughlike2048
             HighRollerUpgrade highRollerUpgrade = (HighRollerUpgrade)upgrade;
             _tileStateVariables.Value = tileStates.Where(x=>x.number == highRollerUpgrade.startedNumber).FirstOrDefault();
         }
+
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            _tileStateVariables.Reset();
+        }
     }
 }

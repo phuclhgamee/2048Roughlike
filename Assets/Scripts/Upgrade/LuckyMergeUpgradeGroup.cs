@@ -14,5 +14,11 @@ namespace Roughlike2048
             FourLuckyMergeUpgrade luckyMergeUpgrade = (FourLuckyMergeUpgrade)upgrade;
             luckyMergeVariable.Value = luckyMergeUpgrade.Probability;
         }
+
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            luckyMergeVariable.Reset();
+        }
     }
 }

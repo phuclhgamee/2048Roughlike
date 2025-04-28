@@ -19,6 +19,7 @@ namespace Roughlike2048
         [SerializeField] private Event.Event CloseUpgradeUIEvent;
         [SerializeField] private Event.Event OnChoosingUpgradeEvent;
         [SerializeField] private IntegerVariable NumberOfUpgradeSelected;
+        
 
         public void Setup(UpgradeGroup group)
         {
@@ -56,7 +57,6 @@ namespace Roughlike2048
             group.ListenEvent();
             CloseUpgradeUIEvent.Raise();
             OnChoosingUpgradeEvent.Raise();
-            
         }
 
         

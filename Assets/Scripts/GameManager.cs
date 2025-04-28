@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
     
+    [Header("Manager")] 
+    [SerializeField] private UpgradeManager upgradeManager;
+    
     public int score { get; private set; } = 0;
 
     private void Awake()
@@ -64,6 +67,12 @@ public class GameManager : MonoBehaviour
         board.enabled = true;
         
         OpenUpgradeUIEvent.Raise();
+    }
+
+    public void Replay()
+    {
+        NewGame();
+        upgradeManager.ReplayUpgradeReset();
     }
     public void GameOver()
     {
@@ -150,6 +159,6 @@ public class GameManager : MonoBehaviour
             OpenUpgradeUIEvent.Raise();
         }
     }
-
+    
     
 }

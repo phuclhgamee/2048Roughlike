@@ -14,5 +14,11 @@ namespace Roughlike2048
             SuperEightUpgrade superEightUpgrade = (SuperEightUpgrade)upgrade;
             superEightVariables.Value = superEightUpgrade.Probability;
         }
+
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            superEightVariables.Reset();
+        }
     }
 }

@@ -25,6 +25,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private UnderVariable UnderUpgradeStat;
     [SerializeField] private ChangingFourTileVariable ChangingFourTileStat;
     [SerializeField] private FirstDeathVariable FirstDeathStat;
+    [SerializeField] private HighRiskHighRewardVariable HighRiskHighRewardStat;
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
@@ -34,7 +35,7 @@ public class TileBoard : MonoBehaviour
     
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
-    [SerializeField] private Event OnChoosingUpgradeEvent;
+    [SerializeField] private Event FirstDeathEvent;
     
     [Header("UI")]
     [SerializeField] private Button UnderButton;
@@ -184,13 +185,10 @@ public class TileBoard : MonoBehaviour
     
     #region FirstDeathEvent
 
-    private void UseFirstDeathUpgrade()
+    public void FirstDeathEventResponse()
     {
-        if (FirstDeathStat.Value.IsActivated && CheckForGameOver())
-        {
-            DestroyAllExceptForBiggestAndSmallest();
-            FirstDeathStat.Value = new FirstDeathUpgradeData(false);
-        }
+        DestroyAllExceptForBiggestAndSmallest();
+        FirstDeathStat.Value = new FirstDeathUpgradeData(false);
     }
 
     private void DestroyAllExceptForBiggestAndSmallest()
@@ -198,21 +196,9 @@ public class TileBoard : MonoBehaviour
         Tile biggestTile = GetBiggestTile();
         Tile smallestTile = GetSmallestTile();
         
-        foreach (var cell in grid.cells) 
-        {
-            if (cell.tile != biggestTile && cell.tile != smallestTile)
-            {
-                cell.tile = null;
-            }
-        }
-        foreach (var tile in tiles) {
-            if (tile != biggestTile && tile != smallestTile)
-            {
-                Tile t = tile;
-                tiles.Remove(tile);
-                Destroy(t.gameObject);
-            }
-        }
+        ClearBoard();
+        CreateTile(biggestTile);
+        CreateTile(smallestTile);
         
     }
 
@@ -372,7 +358,14 @@ public class TileBoard : MonoBehaviour
         }
 
         if (CheckForGameOver()) {
-            GameManager.Instance.GameOver();
+            if (FirstDeathStat.Value.IsActivated)
+            {
+                FirstDeathEvent.Raise();
+            }
+            else
+            {
+                GameManager.Instance.GameOver();
+            }
         }
     }
 
@@ -405,7 +398,7 @@ public class TileBoard : MonoBehaviour
                 return false;
             }
         }
-
+        
         return true;
         
     }
@@ -423,6 +416,7 @@ public class TileBoard : MonoBehaviour
     {
         NumberOfUpgradeSelected.Value++;
         RemainingMoves.Value = TargetMoves.Value;
+        upgradeManager.UpgradeAvailableGroup();
         StartCoroutine(IEWaitForUpgradeUIInactive());
     }
     
@@ -431,5 +425,6 @@ public class TileBoard : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         IsUpgradeUIActive.Value = false;
     }
+    
 
 }

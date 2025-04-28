@@ -32,6 +32,11 @@ namespace Roughlike2048.Event
             runtimeValue = initializeValue;
         }
 
+        public void Reset()
+        {
+            Value = initializeValue;
+        }
+
         public override string ToString()
         {
             return Value.ToString();

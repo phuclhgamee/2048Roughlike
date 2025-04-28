@@ -19,7 +19,14 @@ namespace Roughlike2048
                 return Upgrades[LevelStatus.Value-1];
             }
         }
-
+        public bool IsGettingMaxLevel
+        {
+            get
+            {
+                if(Upgrades == null) return false;
+                return LevelStatus.Value >= Upgrades.Length;
+            }
+        }
         public string GetNextLevelDescription()
         {
             try
@@ -32,15 +39,22 @@ namespace Roughlike2048
             }
             
         }
-
+        
         public Sprite GetNextLevelIcon()
         {
             return Upgrades[LevelStatus.Value].Icon;
+        }
+
+        public virtual void ReplayReset()
+        {
+            LevelStatus.Reset();
         }
         public virtual void ListenEvent()
         {
             LevelStatus.Value = Mathf.Clamp(LevelStatus.Value + 1, 0, Upgrades.Length);
         }
+
+        
     }
     public enum UpgradeType
     {

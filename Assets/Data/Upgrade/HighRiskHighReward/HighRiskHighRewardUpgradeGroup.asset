@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7969e621bea2409bbfb59e832512e9b5, type: 3}
+  m_Name: HighRiskHighRewardUpgradeGroup
+  m_EditorClassIdentifier: 
+  name: High Risk High Value
+  Upgrades:
+  - {fileID: 11400000, guid: 8102a3adf35a6c7449c6639c9ca26676, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 9673a147d151b1740a8b7ecdbc64bf9b, type: 2}
+  _highRiskHighRewardVariable: {fileID: 11400000, guid: 350a2f86640cb894dbac7d715bb4d044, type: 2}

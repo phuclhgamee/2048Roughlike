@@ -1,4 +1,5 @@
-﻿using Roughlike2048.Event;
+﻿using System;
+using Roughlike2048.Event;
 using UnityEngine;
 
 namespace Roughlike2048
@@ -13,6 +14,12 @@ namespace Roughlike2048
             base.ListenEvent();
             ChangingFourTileUpgrade changingFourTileUpgrade = (ChangingFourTileUpgrade)upgrade;
             _changingFourTileVariable.Value = changingFourTileUpgrade.Data;
+        }
+
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            _changingFourTileVariable.Reset();
         }
     }
 }

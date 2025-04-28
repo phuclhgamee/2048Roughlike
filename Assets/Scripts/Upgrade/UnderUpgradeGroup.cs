@@ -14,5 +14,11 @@ namespace Roughlike2048
             UnderUpgrade underUpgrade = (UnderUpgrade)upgrade;
             _underVariable.Value = underUpgrade.Data;
         }
+
+        public override void ReplayReset()
+        {
+            base.ReplayReset();
+            _underVariable.Reset();
+        }
     }
 }
