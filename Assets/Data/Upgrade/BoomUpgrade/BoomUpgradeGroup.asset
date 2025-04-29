@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac110f2b84204dddb03bbf6554f28fc3, type: 3}
+  m_Name: BoomUpgradeGroup
+  m_EditorClassIdentifier: 
+  name: Boom!
+  Upgrades:
+  - {fileID: 11400000, guid: ace7d856c7f12f04fa01628dbb6233f9, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 89801ea250b5a8344ae427adbe8f9c01, type: 2}
+  boomUpgradeVariable: {fileID: 11400000, guid: 3f15a22bc2864db4492e13da4b2a5d9a, type: 2}
+  CurrentBoooms: {fileID: 11400000, guid: 8438fc8f0911a6a438cf12664f5cb697, type: 2}
+  EnableBoomButtonEvent: {fileID: 11400000, guid: 08d4a486e70e61c4eaa6856ac529eeed, type: 2}

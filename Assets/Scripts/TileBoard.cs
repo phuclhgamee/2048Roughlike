@@ -36,7 +36,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private IntegerVariable NumberOfUpgradeSelected;
     [SerializeField] private BooleanVariable IsUpgradeUIActive;
     [SerializeField] private IntegerVariable BiggestValue;
-    
+    [SerializeField] private IntegerVariable CurrentBooms;
     
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
@@ -44,12 +44,16 @@ public class TileBoard : MonoBehaviour
     
     [Header("UI")]
     [SerializeField] private Button UnderButton;
+    [SerializeField] private Button BoomButton;
+    [SerializeField] private Image BackgroundImage;
+    [SerializeField] private Button BackgroundButton;
     
     private TileGrid grid;
     private List<Tile> tiles;
     private bool waiting;
     private Stack<List<StoredTile>> tilesStack;
     private int underMoveCount = 0;
+    private bool booming = false;
     
     public int UnderMoveCount
     {
@@ -94,6 +98,7 @@ public class TileBoard : MonoBehaviour
         if (waiting) return;
         if (CheckForGameOver()) return;
         if (IsUpgradeUIActive.Value) return;
+        if (booming) return;
         
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)||InputManager.SwipeUp()) {
             Move(Vector2Int.up, 0, 1, 1, 1);
@@ -125,11 +130,7 @@ public class TileBoard : MonoBehaviour
     
     public void EnableUnderButton()
     {
-        UnderButton.gameObject.SetActive(false);
-        if (UnderUpgradeStat.Value.IsActivated)
-        {
-            UnderButton.gameObject.SetActive(true);
-        }
+        UnderButton.gameObject.SetActive(UnderUpgradeStat.Value.IsActivated);
     }
     
     public void OnClickUnderButton()
@@ -323,6 +324,50 @@ public class TileBoard : MonoBehaviour
         return count;
     }
 
+    #endregion
+
+    #region BoomEvent
+
+    public void EnableBoomButton()
+    {
+        BoomButton.gameObject.SetActive(true);
+    }
+    public void OnClickBoomButton()
+    {
+        BackgroundImage.color = Color.grey;
+        foreach (Tile tile in tiles)
+        {
+            Button button = tile.gameObject.AddComponent<Button>();
+            button.onClick.AddListener(() => { OnClickTileCell(tile); });
+        }
+
+        booming = true;
+    }
+
+    public void OnClickTileCell(Tile tile)
+    {
+        tile.cell.tile = null;
+        Destroy(tile.gameObject);
+        CurrentBooms.Value--;
+        AfterSelectTileCell();
+    }
+    
+    public void AfterSelectTileCell()
+    {
+        foreach (Tile tile in tiles)
+        {
+            Button button = tile.gameObject.GetComponent<Button>();
+            Destroy(button);
+        }
+        BackgroundImage.color = Color.white;
+        StartCoroutine(WaitingForBooming());
+    }
+
+    IEnumerator WaitingForBooming()
+    {
+        yield return new WaitForSeconds(0.1f);
+        booming = false;
+    }
     #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
@@ -533,7 +578,9 @@ public class TileBoard : MonoBehaviour
         NumberOfUpgradeSelected.Reset();
         IsUpgradeUIActive.Reset();
         BiggestValue.Reset();
+        CurrentBooms.Reset();
         EnableUnderButton();
     }
 
+    
 }

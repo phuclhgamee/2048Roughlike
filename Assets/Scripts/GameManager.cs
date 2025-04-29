@@ -3,6 +3,7 @@ using Roughlike2048;
 using Roughlike2048.Event;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Event = Roughlike2048.Event.Event;
 
 [DefaultExecutionOrder(-1)]
@@ -16,17 +17,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hiscoreText;
     [SerializeField] private TextMeshProUGUI RemainedMovesText;
     [SerializeField] private CanvasGroup UpgradeUI;
+    [SerializeField] private TextMeshProUGUI CurrentBoomsText;
+    [SerializeField] private Button BoomButton;
+    [SerializeField] private Camera MainCamera;
     
     [Header("Stats")]
     [SerializeField] private IntegerVariable TargetMoves;
     [SerializeField] private IntegerVariable RemainingMoves;
     [SerializeField] private BooleanVariable IsUpgradeUIActive;
+    [SerializeField] private IntegerVariable CurrentBooms;
     
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
     
     [Header("Manager")] 
     [SerializeField] private UpgradeManager upgradeManager;
+
     
     public int score { get; private set; } = 0;
 
@@ -161,6 +167,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    public void SetCurrentBoomsText(int booms)
+    {
+        CurrentBoomsText.text = CurrentBooms.Value.ToString();
+        BoomButton.interactable = true;
+        if (CurrentBooms.Value == 0)
+        {
+            BoomButton.interactable = false;
+        }
+    }
     
 }
