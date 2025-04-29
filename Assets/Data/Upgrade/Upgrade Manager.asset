@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a54a2470401ee642a634569db883fc3, type: 2}
   - {fileID: 11400000, guid: 06f590c5fc025f643847bc3bda7d3059, type: 2}
   - {fileID: 11400000, guid: 8088e96b31d327a4aa1ea586cbe1b27f, type: 2}
+  - {fileID: 11400000, guid: c176b458d1141ff4c831077d3bd7c64e, type: 2}
   currentUpgradeGroups: []
   availableUpgradeGroups:
   - {fileID: 11400000, guid: 9c0c93a90386cde4fb651fb73eed5754, type: 2}
@@ -31,3 +32,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e963c9616b3298842bb78372637a2bbc, type: 2}
   - {fileID: 11400000, guid: 1a287c41864471d4c94f592481e6e999, type: 2}
   - {fileID: 11400000, guid: 6a54a2470401ee642a634569db883fc3, type: 2}
+  - {fileID: 11400000, guid: 06f590c5fc025f643847bc3bda7d3059, type: 2}
+  - {fileID: 11400000, guid: 8088e96b31d327a4aa1ea586cbe1b27f, type: 2}

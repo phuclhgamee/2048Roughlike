@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8edf8a6b9e409fa2311ae7bf36036a, type: 3}
+  m_Name: PowerMilestoneGroup
+  m_EditorClassIdentifier: 
+  name: Power Milestone
+  Upgrades:
+  - {fileID: 11400000, guid: 2b509e0bce2d71549bf8888a5cd7a7ad, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 4eda807447c37474d83d26501007c862, type: 2}
+  variable: {fileID: 11400000, guid: d40e84aa5d57cb14183efab485e319d7, type: 2}

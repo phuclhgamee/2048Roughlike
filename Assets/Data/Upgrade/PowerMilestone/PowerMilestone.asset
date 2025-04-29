@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b37cd42fd4a41a18e351819377f27c2, type: 3}
+  m_Name: PowerMilestone
+  m_EditorClassIdentifier: 
+  Description: "M\u1ED7i khi \u0111\u1EA1t \u0111\u01B0\u1EE3c s\u1ED1 c\xF3 th\xEAm
+    1 ch\u1EEF s\u1ED1 (t\u1EEB 8 \u2192 16 \u2192 128 \u2192 1024...), Ch\u1ECDn
+    1 trong 3 n\xE2ng c\u1EA5p"
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
+  Data:
+    IsActivated: 1

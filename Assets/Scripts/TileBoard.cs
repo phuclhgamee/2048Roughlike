@@ -28,6 +28,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private HighRiskHighRewardVariable HighRiskHighRewardStat;
     [SerializeField] private Merge2048Variable Merge2048Stat;
     [SerializeField] private BiggerVariable BiggerStat;
+    [SerializeField] private PowerMilestoneVariable PowerMilestoneStat;
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
@@ -35,6 +36,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private IntegerVariable NumberOfUpgradeSelected;
     [SerializeField] private BooleanVariable IsUpgradeUIActive;
     [SerializeField] private IntegerVariable BiggestValue;
+    
     
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
@@ -284,15 +286,22 @@ public class TileBoard : MonoBehaviour
     
     #endregion
 
-    #region BiggerEvent
+    #region BiggerEvent && PowerMilestoneEvent
 
     public void BiggestValueChangeTrigger()
     {
         int biggestTileValue= GetBiggestTile().state.number;
-        if (BiggestValue.Value < biggestTileValue && biggestTileValue > 4 && BiggerStat.Value.PercentageValue > 0)
+        if (BiggestValue.Value < biggestTileValue && biggestTileValue > 4)
         {
-            Tile newTile = new Tile(grid.GetRandomEmptyCell(),GetByNumber((int)(biggestTileValue*BiggerStat.Value.PercentageValue)));
-            CreateTile(newTile);
+            if (BiggerStat.Value.PercentageValue > 0)
+            {
+                Tile newTile = new Tile(grid.GetRandomEmptyCell(),GetByNumber((int)(biggestTileValue*BiggerStat.Value.PercentageValue)));
+                CreateTile(newTile);
+            }
+            if ((NumberOfDigits(biggestTileValue) != NumberOfDigits(BiggestValue.Value)) && PowerMilestoneStat.Value.IsActivated)
+            {
+                OpenUpgradeUIEvent.Raise();
+            }
             BiggestValue.Value = biggestTileValue;
         }
         
@@ -302,6 +311,18 @@ public class TileBoard : MonoBehaviour
     {
         return tileStates.Where(x=>x.number == number).FirstOrDefault();
     }
+    public int NumberOfDigits(int number)
+    {
+        int value = number;
+        int count = 0;
+        while (value > 0)
+        {
+            value /= 10;
+            count++;
+        }
+        return count;
+    }
+
     #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {

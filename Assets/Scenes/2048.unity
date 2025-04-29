@@ -1583,6 +1583,7 @@ MonoBehaviour:
   HighRiskHighRewardStat: {fileID: 11400000, guid: 350a2f86640cb894dbac7d715bb4d044, type: 2}
   Merge2048Stat: {fileID: 11400000, guid: 16ebb344afa12d44fa4c6f2c739fc22c, type: 2}
   BiggerStat: {fileID: 11400000, guid: 01b3775631b48494c9bc807592368fb5, type: 2}
+  PowerMilestoneStat: {fileID: 0}
   TargetMoves: {fileID: 11400000, guid: e4f779520d60d594e8417e15858f38f3, type: 2}
   RemainingMoves: {fileID: 11400000, guid: 5c9a17955ff8a61418052095b1473096, type: 2}
   NumberOfUpgradeSelected: {fileID: 11400000, guid: 5632878a89f241d49bf0a37ae4b59afd, type: 2}
