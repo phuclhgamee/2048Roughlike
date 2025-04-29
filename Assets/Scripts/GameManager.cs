@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         
         OpenUpgradeUIEvent.Raise();
     }
-
+    
     public void Replay()
     {
         upgradeManager.ReplayUpgradeReset();

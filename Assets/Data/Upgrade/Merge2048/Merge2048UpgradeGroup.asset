@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeab80d624174dbebe4f97e4148675d1, type: 3}
   m_Name: Merge2048UpgradeGroup
   m_EditorClassIdentifier: 
-  name: 
+  name: 2048
   Upgrades:
   - {fileID: 11400000, guid: c1419a6d3de1ec647b683f31170d9090, type: 2}
   Type: 0

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95796742e14549a38c0873f034520bed, type: 3}
+  m_Name: BiggerUpgrade
+  m_EditorClassIdentifier: 
+  Description: "M\u1ED7i khi \xF4 l\u1EDBn nh\u1EA5t c\u1EE7a b\u1EA1n \u0111\u01B0\u1EE3c
+    n\xE2ng l\xEAn, nh\u1EADn 1 \xF4 c\xF3 gi\xE1 tr\u1ECB b\u1EB1ng 1/4 \xF4 \u0111\xF3
+    \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn"
+  Icon: {fileID: 0}
+  Data:
+    PercentageValue: 0.25

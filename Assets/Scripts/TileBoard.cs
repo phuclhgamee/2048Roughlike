@@ -27,12 +27,14 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private FirstDeathVariable FirstDeathStat;
     [SerializeField] private HighRiskHighRewardVariable HighRiskHighRewardStat;
     [SerializeField] private Merge2048Variable Merge2048Stat;
+    [SerializeField] private BiggerVariable BiggerStat;
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
     [SerializeField] private IntegerVariable RemainingMoves;
     [SerializeField] private IntegerVariable NumberOfUpgradeSelected;
     [SerializeField] private BooleanVariable IsUpgradeUIActive;
+    [SerializeField] private IntegerVariable BiggestValue;
     
     [Header("Events")] 
     [SerializeField] private Event OpenUpgradeUIEvent;
@@ -60,20 +62,7 @@ public class TileBoard : MonoBehaviour
             }
         }
     }
-
-    private int biggestTileValue = 2;
-    public int BiggestTileValue
-    {
-        get
-        {
-            if (GetBiggestTile().state.number != biggestTileValue)
-            {
-                
-            }
-            biggestTileValue = GetBiggestTile().state.number;
-            return GetBiggestTile().state.number;
-        } 
-    }
+    
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -119,6 +108,7 @@ public class TileBoard : MonoBehaviour
 
         ChangingFourTiles();
         EnableUnderButton();
+        BiggestValueChangeTrigger();
     }
     #region UnderEvent
     public void StoreTileInStack(List<Tile> tilesPosition)
@@ -277,6 +267,26 @@ public class TileBoard : MonoBehaviour
         return false;
     }
     
+    #endregion
+
+    #region BiggerEvent
+
+    public void BiggestValueChangeTrigger()
+    {
+        int biggestTileValue= GetBiggestTile().state.number;
+        if (BiggestValue.Value < biggestTileValue && biggestTileValue > 4 && BiggerStat.Value.PercentageValue > 0)
+        {
+            Tile newTile = new Tile(grid.GetRandomEmptyCell(),GetByNumber((int)(biggestTileValue*BiggerStat.Value.PercentageValue)));
+            CreateTile(newTile);
+            BiggestValue.Value = biggestTileValue;
+        }
+        
+    }
+
+    public TileState GetByNumber(int number)
+    {
+        return tileStates.Where(x=>x.number == number).FirstOrDefault();
+    }
     #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
@@ -487,6 +497,7 @@ public class TileBoard : MonoBehaviour
         TargetMoves.Reset();
         NumberOfUpgradeSelected.Reset();
         IsUpgradeUIActive.Reset();
+        BiggestValue.Reset();
         EnableUnderButton();
     }
 
