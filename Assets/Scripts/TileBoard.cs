@@ -269,6 +269,21 @@ public class TileBoard : MonoBehaviour
     
     #endregion
 
+    #region Merge2048Event
+
+    IEnumerator WaitForMerge2048()
+    {
+        yield return new WaitUntil(()=>!waiting);
+        foreach (var tileValue in Merge2048Stat.Value.CreatedValues)
+        {
+            TileState state = GetByNumber(tileValue);
+            Tile tile = new Tile(grid.GetRandomEmptyCell(),state);
+            CreateTile(tile);
+        }
+    }
+    
+    #endregion
+
     #region BiggerEvent
 
     public void BiggestValueChangeTrigger()
@@ -295,7 +310,7 @@ public class TileBoard : MonoBehaviour
         bool changed = false;
 
         for (int x = startX; x >= 0 && x < grid.Width; x += incrementX)
-        {
+        {  
             for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
             {
                 TileCell cell = grid.GetCell(x, y);
@@ -369,13 +384,12 @@ public class TileBoard : MonoBehaviour
         //Merge2048
         if (newState.number == Merge2048Stat.Value.MergeValue)
         {
-            
-            Tile tile = new Tile(grid.GetRandomEmptyCell(),newState);
-            CreateTile(tile);
+            StartCoroutine(WaitForMerge2048());
         }
         GameManager.Instance.IncreaseScore(newState.number);
     }
-
+    
+    
     private int GetMergeTileIndex(Tile a, Tile b)
     {
         int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);

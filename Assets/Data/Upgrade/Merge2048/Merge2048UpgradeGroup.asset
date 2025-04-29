@@ -15,6 +15,8 @@ MonoBehaviour:
   name: 2048
   Upgrades:
   - {fileID: 11400000, guid: c1419a6d3de1ec647b683f31170d9090, type: 2}
+  - {fileID: 11400000, guid: c2cbe1e71b1ebb44597c84aafe90b8d2, type: 2}
+  - {fileID: 11400000, guid: b028753a169635043a668414f3b93dc7, type: 2}
   Type: 0
   LevelStatus: {fileID: 11400000, guid: 62dec49bb7797c74da1859b60ee44533, type: 2}
   _merge2048Variable: {fileID: 11400000, guid: 16ebb344afa12d44fa4c6f2c739fc22c, type: 2}

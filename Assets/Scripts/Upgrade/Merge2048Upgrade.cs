@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roughlike2048
@@ -13,5 +14,6 @@ namespace Roughlike2048
     public class Merge2048UpgradeData
     {
         public int MergeValue;
+        public List<int> CreatedValues;
     }
 }
