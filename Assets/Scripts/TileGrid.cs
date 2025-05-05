@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TileGrid : MonoBehaviour
@@ -63,5 +64,29 @@ public class TileGrid : MonoBehaviour
 
         return cells[index];
     }
+
+    public List<TileRow> GetFulledTileRows(int value)
+    {
+        List<TileRow> fulledRows = new List<TileRow>();
+        bool isFulledAndCanReversed;
+        foreach (TileRow row in rows)
+        {
+            isFulledAndCanReversed = true;
+            foreach (TileCell cell in row.cells)
+            {
+                if (cell.Empty || cell.tile?.state.number>=value)
+                {
+                    isFulledAndCanReversed = false;
+                }
+            }
+
+            if (isFulledAndCanReversed)
+            {
+                fulledRows.Add(row);
+            }
+        }
+        return fulledRows;
+    }
+    
 
 }

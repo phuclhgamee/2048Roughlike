@@ -30,6 +30,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private Merge2048Variable Merge2048Stat;
     [SerializeField] private BiggerVariable BiggerStat;
     [SerializeField] private PowerMilestoneVariable PowerMilestoneStat;
+    [SerializeField] private ReverseUpgradeVariable ReverseUpgradeStat;
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
@@ -118,6 +119,7 @@ public class TileBoard : MonoBehaviour
         ChangingFourTiles();
         EnableUnderButton();
         BiggestValueChangeTrigger();
+        StartCoroutine(ReverseChecking());
     }
     #region UnderEvent
     public void StoreTileInStack(List<Tile> tilesPosition)
@@ -264,7 +266,7 @@ public class TileBoard : MonoBehaviour
     public bool IsBiggestTileInCorner()
     {
         if (GetBiggestTile().state.number >= HighRiskHighRewardStat.Value.BiggsetValueToTrigger
-            && IsInCorner(GetBiggestTile()))
+            && !IsInCorner(GetBiggestTile()))
         {
             return true;
         }
@@ -378,6 +380,35 @@ public class TileBoard : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         booming = false;
     }
+    #endregion
+
+    #region ReverseEvent
+
+    IEnumerator ReverseChecking()
+    {
+        yield return new WaitUntil(()=>!waiting);
+        List<TileRow> rows = grid.GetFulledTileRows(ReverseUpgradeStat.Value.LimitedValue);
+        foreach (TileRow row in rows)
+        {
+            foreach (TileCell cell in row.cells)
+            {
+                if (cell.tile != null)
+                {
+                    if (!cell.IsBiggestInRow)
+                    {
+                        ClearTile(cell, cell.tile);
+                    }
+                    else
+                    {
+                        cell.tile.SetState(GetByNumber(cell.tile.state.number * 2));
+                    }
+                }
+               
+            }
+        }
+    }
+    
+
     #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
@@ -592,5 +623,11 @@ public class TileBoard : MonoBehaviour
         EnableUnderButton();
     }
 
+    public void ClearTile(TileCell tileCell, Tile tile)
+    {
+        tileCell.tile = null;
+        Destroy(tile.gameObject);
+        tiles.Remove(tile);
+    }
     
 }

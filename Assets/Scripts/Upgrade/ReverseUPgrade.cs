@@ -12,7 +12,8 @@ namespace Roughlike2048
     [Serializable]
     public class ReverseUpgradeData
     {
-        public int LimitedNumber;
+        public int LimitedValue;
         public bool CanReverseRowAndColumn;
+        public int Multiple;
     }
 }

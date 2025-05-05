@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca257594b6c4c258d74cd2337b352f5, type: 3}
+  m_Name: ReverseUpgrade
+  m_EditorClassIdentifier: 
+  Description: "M\u1ED7i khi 1 h\xE0ng t\u1ED3n t\u1EA1i 4 gi\xE1 tr\u1ECB kh\xE1c
+    nhau nh\u1ECF h\u01A1n ho\u1EB7c b\u1EB1ng 64, ch\xFAng s\u1EBD t\u1EF1 \u0111\u1ED9ng 
+    h\u1EE3p v\xE0o nhau \u0111\u1EC3 bi\u1EBFn s\u1ED1 l\u1EDBn nh\u1EA5t trong
+    h\xE0ng ho\u1EB7c c\u1ED9t x2 gi\xE1 tr\u1ECB."
+  Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
+  Data:
+    LimitedValue: 64
+    CanReverseRowAndColumn: 0
+    Multiple: 2

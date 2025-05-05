@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f6a55a5a7a4683b49b447bb6e83d95, type: 3}
+  m_Name: ReverseUpgradeGroup
+  m_EditorClassIdentifier: 
+  name: Reverse
+  Upgrades:
+  - {fileID: 11400000, guid: fb562d7f716a5af459ced32e21cdc44b, type: 2}
+  - {fileID: 11400000, guid: ea72c60232b8ec24f963ef61b53c5d56, type: 2}
+  - {fileID: 11400000, guid: cb6fa5a457ba6f54bbbec60987aebd74, type: 2}
+  - {fileID: 11400000, guid: 354875f44cadeed4d947600b553c8a27, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 72e9f7682d285134aa0d8060eca78e6a, type: 2}
+  reverseUpgradeVariable: {fileID: 11400000, guid: f31483c3212ba4c43b20b24ed5be585e, type: 2}

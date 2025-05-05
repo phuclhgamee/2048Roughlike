@@ -7,4 +7,10 @@ public class TileCell : MonoBehaviour
 
     public bool Empty => tile == null;
     public bool Occupied => tile != null;
+
+    public bool IsBiggestInRow
+    {
+        get;
+        set;
+    }
 }
