@@ -24,8 +24,8 @@ namespace Roughlike2048
         public List<UpgradeGroup> GetRandomUpgradeGroups(int numberOfGroups)
         {
             return availableUpgradeGroups
-                //.OrderBy(_ => Random.value)
-                .TakeLast(numberOfGroups)
+                .OrderBy(_ => Random.value)
+                .Take(numberOfGroups)
                 .ToList();
         }
 

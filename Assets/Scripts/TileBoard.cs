@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Roughlike2048;
 using Roughlike2048.Event;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Event = Roughlike2048.Event.Event;
@@ -47,6 +48,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private Button BoomButton;
     [SerializeField] private Image BackgroundImage;
     [SerializeField] private Button BackgroundButton;
+    [SerializeField] private TextMeshProUGUI NextMoveText;
     
     private TileGrid grid;
     private List<Tile> tiles;
@@ -335,18 +337,21 @@ public class TileBoard : MonoBehaviour
     public void OnClickBoomButton()
     {
         BackgroundImage.color = Color.grey;
+        NextMoveText.color = Color.white;
         foreach (Tile tile in tiles)
         {
             Button button = tile.gameObject.AddComponent<Button>();
             button.onClick.AddListener(() => { OnClickTileCell(tile); });
         }
-
+        
         booming = true;
+        BackgroundButton.onClick.AddListener(()=>AfterSelectTileCell());
     }
 
     public void OnClickTileCell(Tile tile)
     {
         tile.cell.tile = null;
+        tiles.Remove(tile);
         Destroy(tile.gameObject);
         CurrentBooms.Value--;
         AfterSelectTileCell();
@@ -357,10 +362,15 @@ public class TileBoard : MonoBehaviour
         foreach (Tile tile in tiles)
         {
             Button button = tile.gameObject.GetComponent<Button>();
-            Destroy(button);
+            if (button)
+            {
+                Destroy(button);
+            }
         }
         BackgroundImage.color = Color.white;
+        NextMoveText.color = new Color(119f/255f, 110f/255f, 101f/255f, 1f);
         StartCoroutine(WaitingForBooming());
+        BackgroundButton.onClick.RemoveAllListeners();
     }
 
     IEnumerator WaitingForBooming()
