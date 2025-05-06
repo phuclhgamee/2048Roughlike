@@ -505,7 +505,11 @@ public class TileBoard : MonoBehaviour
                 UnderMoveCount++;
                 RemainingMoves.Value--;
             }
-            
+
+            if (RemainingMoves.Value < 0)
+            {
+                RemainingMoves.Value = 0;
+            }
         }
     }
     

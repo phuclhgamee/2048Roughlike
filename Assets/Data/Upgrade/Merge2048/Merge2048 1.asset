@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3656f1e9244eb4b3778485aaba4a68, type: 3}
   m_Name: Merge2048 1
   m_EditorClassIdentifier: 
-  Description: "M\u1ED7i khi gh\xE9p \u0111\u01B0\u1EE3c \xF4 2048, nh\u1EADn ngay
-    1 \xF4 2048 \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn"
+  Description: "Nh\u1EADn th\xEAm 1 \xF4 1024 random"
   Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
     MergeValue: 2048

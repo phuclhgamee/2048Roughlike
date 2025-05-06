@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: "S\xE1c xu\u1EA5t 36 > 52%"
   Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
-  Probability: 1
+  Probability: 0.52

@@ -16,5 +16,5 @@ MonoBehaviour:
     1 \xF4 2048 \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn"
   Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
-    MergeValue: 16
-    CreatedValues: 10000000
+    MergeValue: 2048
+    CreatedValues: 00080000
