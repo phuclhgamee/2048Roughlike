@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TileRow : MonoBehaviour
@@ -7,22 +8,34 @@ public class TileRow : MonoBehaviour
     private void Awake()
     {
         cells = GetComponentsInChildren<TileCell>();
-        TileCell tilecell = GetBiggestTileInRow();
-        tilecell.IsBiggestInRow = true;
+        
     }
-
     public TileCell GetBiggestTileInRow()
     {
         TileCell tilecell = cells[0];
         foreach (TileCell cell in cells)
         {
-            if (cell.tile?.state.number > tilecell.tile?.state.number)
+            if (cell.tile != null && cell.tile.state != null)
             {
-                tilecell = cell;
+                if (tilecell == null || 
+                    tilecell.tile == null || tilecell.tile.state == null || 
+                    cell.tile.state.number > tilecell.tile.state.number)
+                {
+                    tilecell = cell;
+                }
             }
         }
         return tilecell;
     }
-    
-    
+
+    public void ResetTileCell()
+    {
+        TileCell tilecell = GetBiggestTileInRow();
+        foreach (TileCell cell in cells) cell.IsBiggestInRow = false;
+        tilecell.IsBiggestInRow = true;
+    }
+    private void Update()
+    {
+        ResetTileCell();
+    }
 }

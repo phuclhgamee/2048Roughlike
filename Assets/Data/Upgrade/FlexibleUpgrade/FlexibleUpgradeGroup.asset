@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450117cc9cac4c07a1fd24a307cef363, type: 3}
+  m_Name: FlexibleUpgradeGroup
+  m_EditorClassIdentifier: 
+  name: Flexible
+  Upgrades:
+  - {fileID: 11400000, guid: 8c84ae5c271404d4a9aad703f673c61d, type: 2}
+  Type: 0
+  LevelStatus: {fileID: 11400000, guid: 7cc6e0f14005cde4b88d5feb8d3dd0e9, type: 2}
+  _flexibleUpgradeVariable: {fileID: 11400000, guid: 94bf05736f44fdd4bb7f76587b2782e8, type: 2}
+  EnableBoomButtonEvent: {fileID: 11400000, guid: 08d4a486e70e61c4eaa6856ac529eeed, type: 2}
+  EnableFlexibleTextEvent: {fileID: 11400000, guid: d11577a7af61c5443b090697e5580b56, type: 2}
+  CurrentBooms: {fileID: 11400000, guid: 8438fc8f0911a6a438cf12664f5cb697, type: 2}

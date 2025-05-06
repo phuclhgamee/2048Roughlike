@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
             OpenUpgradeUIEvent.Raise();
         }
     }
-
+    
     public void SetCurrentBoomsText(int booms)
     {
         CurrentBoomsText.text = CurrentBooms.Value.ToString();

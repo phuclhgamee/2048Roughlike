@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1dfee54b2364d7bb03b3734ba9f0b36, type: 3}
-  m_Name: HighRiskHighReward
+  m_Script: {fileID: 11500000, guid: f974398e6d8345b2aca4c20d62d4d384, type: 3}
+  m_Name: FlexibleUpgrade
   m_EditorClassIdentifier: 
-  Description: "N\u1EBFu \xF4 to nh\u1EA5t c\u1EE7a b\u1EA1n >= 1024 v\xE0 kh\xF4ng
-    n\u1EB1m \u1EDF 4 \xF4 g\xF3c, th\xEC m\u1ED7i move c\u1EE7a b\u1EA1n t\xEDnh
-    l\xE0 2 move\t"
+  Description: "N\u1EBFu thao t\xE1c c\u1EE7a b\u1EA1n kh\xF4ng l\u1EB7p l\u1EA1i
+    trong 20 l\u1EA7n, nh\u1EADn 1 item Bom"
   Icon: {fileID: 21300000, guid: 8b6930696336feb4f907a32ca1a2de87, type: 3}
   Data:
+    Steps: 20
+    BoomAwards: 1
     IsActivated: 1
-    BiggsetValueToTrigger: 1024
-    Move: 2

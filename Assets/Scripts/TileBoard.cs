@@ -31,6 +31,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private BiggerVariable BiggerStat;
     [SerializeField] private PowerMilestoneVariable PowerMilestoneStat;
     [SerializeField] private ReverseUpgradeVariable ReverseUpgradeStat;
+    [SerializeField] private FlexibleUpgradeVariable FlexibleUpgradeStat; 
     
     [Space] 
     [SerializeField] private IntegerVariable TargetMoves;
@@ -50,6 +51,7 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private Image BackgroundImage;
     [SerializeField] private Button BackgroundButton;
     [SerializeField] private TextMeshProUGUI NextMoveText;
+    [SerializeField] private TextMeshProUGUI FlexibleMoveText;
     
     private TileGrid grid;
     private List<Tile> tiles;
@@ -57,7 +59,8 @@ public class TileBoard : MonoBehaviour
     private Stack<List<StoredTile>> tilesStack;
     private int underMoveCount = 0;
     private bool booming = false;
-    
+    private int flexibleMoveCount = 0;
+    private Vector2Int previousMove;
     public int UnderMoveCount
     {
         get { return underMoveCount; }
@@ -71,7 +74,22 @@ public class TileBoard : MonoBehaviour
             }
         }
     }
-    
+
+    public int FlexibleMoveCount
+    {
+        get => flexibleMoveCount;
+        set
+        {
+            flexibleMoveCount = value;
+            FlexibleMoveText.text = $"Flexible: {flexibleMoveCount} moves";
+            if (FlexibleMoveCount == FlexibleUpgradeStat.Value.Steps)
+            {
+                FlexibleMoveCount = 0;
+                CurrentBooms.Value += FlexibleUpgradeStat.Value.BoomAwards;
+            }
+        }
+    }
+
     private void Awake()
     {
         grid = GetComponentInChildren<TileGrid>();
@@ -79,6 +97,7 @@ public class TileBoard : MonoBehaviour
         tilesStack = new Stack<List<StoredTile>>();
         HighRollerState.Value = tileStates[0];
         RemainingMoves.Value = 10;
+        flexibleMoveCount = 0;
     }
     
     public void CreateTile()
@@ -119,7 +138,7 @@ public class TileBoard : MonoBehaviour
         ChangingFourTiles();
         EnableUnderButton();
         BiggestValueChangeTrigger();
-        StartCoroutine(ReverseChecking());
+        ReverseChecking();
     }
     #region UnderEvent
     public void StoreTileInStack(List<Tile> tilesPosition)
@@ -384,9 +403,8 @@ public class TileBoard : MonoBehaviour
 
     #region ReverseEvent
 
-    IEnumerator ReverseChecking()
+    void ReverseChecking()
     {
-        yield return new WaitUntil(()=>!waiting);
         List<TileRow> rows = grid.GetFulledTileRows(ReverseUpgradeStat.Value.LimitedValue);
         foreach (TileRow row in rows)
         {
@@ -403,12 +421,20 @@ public class TileBoard : MonoBehaviour
                         cell.tile.SetState(GetByNumber(cell.tile.state.number * 2));
                     }
                 }
-               
             }
         }
     }
     
 
+    #endregion
+
+    #region FlexibleEvent
+
+    public void EnableFlexibleText()
+    {
+        FlexibleMoveText.gameObject.SetActive(true);
+    }
+    
     #endregion
     private void Move(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
     {
@@ -430,6 +456,19 @@ public class TileBoard : MonoBehaviour
 
         if (changed) {
             StartCoroutine(WaitForChanges());
+            if (FlexibleUpgradeStat.Value.IsActivated)
+            {
+                if (previousMove == direction)
+                {
+                    FlexibleMoveCount = 0;
+                }
+                else
+                {
+                    FlexibleMoveCount++;
+                }
+                previousMove = direction;
+            }
+            
             if (IsBiggestTileInCorner() && HighRiskHighRewardStat.Value.IsActivated)
             {
                 UnderMoveCount += HighRiskHighRewardStat.Value.Move;
@@ -440,6 +479,7 @@ public class TileBoard : MonoBehaviour
                 UnderMoveCount++;
                 RemainingMoves.Value--;
             }
+            
         }
     }
     
@@ -614,6 +654,8 @@ public class TileBoard : MonoBehaviour
     public void MoveReplayReset()
     {
         UnderMoveCount = 0;
+        FlexibleMoveCount = 0;
+        previousMove = Vector2Int.zero;
         RemainingMoves.Reset();
         TargetMoves.Reset();
         NumberOfUpgradeSelected.Reset();
@@ -621,6 +663,9 @@ public class TileBoard : MonoBehaviour
         BiggestValue.Reset();
         CurrentBooms.Reset();
         EnableUnderButton();
+        
+        BoomButton.gameObject.SetActive(false);
+        FlexibleMoveText.gameObject.SetActive(false);
     }
 
     public void ClearTile(TileCell tileCell, Tile tile)
