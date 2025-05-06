@@ -5,7 +5,9 @@ public class TileGrid : MonoBehaviour
 {
     public TileRow[] rows { get; private set; }
     public TileCell[] cells { get; private set; }
-
+    
+    public TileCell[][] cellColumns { get; private set; }
+    
     public int Size => cells.Length;
     public int Height => rows.Length;
     public int Width => Size / Height;
@@ -18,6 +20,22 @@ public class TileGrid : MonoBehaviour
         for (int i = 0; i < cells.Length; i++) {
             cells[i].coordinates = new Vector2Int(i % Width, i / Width);
         }
+        
+        cellColumns = new TileCell[Width][];
+
+        for (int x = 0; x < Width; x++)
+        {
+            cellColumns[x] = new TileCell[Height];
+        }
+
+        for (int i = 0; i < cells.Length; i++)
+        {
+            TileCell cell = cells[i];
+            int x = cell.coordinates.x;
+            int y = cell.coordinates.y;
+            cellColumns[x][y] = cell;
+        }
+
     }
 
     public TileCell GetCell(Vector2Int coordinates)
@@ -74,7 +92,7 @@ public class TileGrid : MonoBehaviour
             isFulledAndCanReversed = true;
             foreach (TileCell cell in row.cells)
             {
-                if (cell.Empty || cell.tile?.state.number>=value)
+                if (cell.Empty || cell.tile?.state.number>value)
                 {
                     isFulledAndCanReversed = false;
                 }
@@ -87,6 +105,51 @@ public class TileGrid : MonoBehaviour
         }
         return fulledRows;
     }
-    
+
+    public List<List<TileCell>> GetFulledTileColumns(int value)
+    {
+        List<List<TileCell>> fulledColumns = new();
+        bool isFulledAndCanReversed;
+        for (int x = 0; x < cellColumns.Length; x++)
+        {
+            List<TileCell> column = new List<TileCell>();
+            isFulledAndCanReversed = true;
+            for (int y = 0; y < cellColumns[x].Length; y++)
+            {
+                if (cellColumns[x][y].Empty || cellColumns[x][y].tile?.state.number>value)
+                {
+                    isFulledAndCanReversed = false;
+                }
+                column.Add(cellColumns[x][y]);
+            }
+
+            if (isFulledAndCanReversed)
+            {
+                fulledColumns.Add(column);
+            }
+        }
+        
+        return fulledColumns;
+    }
+
+    public TileCell GetBiggestTile(List<TileCell> cells)
+    {
+        TileCell tilecell = cells[0];
+        foreach (TileCell cell in cells)
+        {
+            if (cell.tile != null && cell.tile.state != null)
+            {
+                if (tilecell == null || 
+                    tilecell.tile == null || tilecell.tile.state == null || 
+                    cell.tile.state.number > tilecell.tile.state.number)
+                {
+                    tilecell = cell;
+                }
+            }
+        }
+        return tilecell;
+    }
 
 }
+
+

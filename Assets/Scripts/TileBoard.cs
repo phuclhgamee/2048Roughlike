@@ -426,6 +426,29 @@ public class TileBoard : MonoBehaviour
                 }
             }
         }
+
+        if (ReverseUpgradeStat.Value.CanReverseRowAndColumn)
+        {
+            List<List<TileCell>> columns = grid.GetFulledTileColumns(ReverseUpgradeStat.Value.LimitedValue);
+            foreach (var column in columns)
+            {
+                TileCell biggestTileCell = grid.GetBiggestTile(column);
+                foreach (TileCell cell in column)
+                {
+                    if (cell.tile != null)
+                    {
+                        if (cell!=biggestTileCell)
+                        {
+                            cell.tile.ReverseMerge(biggestTileCell,tiles);
+                        }
+                        else
+                        {
+                            cell.tile.SetState(GetByNumber(cell.tile.state.number * 2));
+                        }
+                    }
+                }
+            }
+        }
     }
     
 
