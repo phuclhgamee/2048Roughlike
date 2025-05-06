@@ -359,17 +359,18 @@ public class TileBoard : MonoBehaviour
     {
         BackgroundImage.color = Color.grey;
         NextMoveText.color = Color.white;
+        FlexibleMoveText.color = Color.white;
         foreach (Tile tile in tiles)
         {
             Button button = tile.gameObject.AddComponent<Button>();
-            button.onClick.AddListener(() => { OnClickTileCell(tile); });
+            button.onClick.AddListener(() => { OnDestroyTileCell(tile); });
         }
         
         booming = true;
         BackgroundButton.onClick.AddListener(()=>AfterSelectTileCell());
     }
 
-    public void OnClickTileCell(Tile tile)
+    public void OnDestroyTileCell(Tile tile)
     {
         tile.cell.tile = null;
         tiles.Remove(tile);
@@ -390,6 +391,7 @@ public class TileBoard : MonoBehaviour
         }
         BackgroundImage.color = Color.white;
         NextMoveText.color = new Color(119f/255f, 110f/255f, 101f/255f, 1f);
+        FlexibleMoveText.color = new Color(119f/255f, 110f/255f, 101f/255f, 1f);
         StartCoroutine(WaitingForBooming());
         BackgroundButton.onClick.RemoveAllListeners();
     }
@@ -408,13 +410,14 @@ public class TileBoard : MonoBehaviour
         List<TileRow> rows = grid.GetFulledTileRows(ReverseUpgradeStat.Value.LimitedValue);
         foreach (TileRow row in rows)
         {
+            TileCell biggestTileCell = row.GetBiggestTileInRow();
             foreach (TileCell cell in row.cells)
             {
                 if (cell.tile != null)
                 {
                     if (!cell.IsBiggestInRow)
                     {
-                        ClearTile(cell, cell.tile);
+                         cell.tile.ReverseMerge(biggestTileCell,tiles);
                     }
                     else
                     {
@@ -597,6 +600,7 @@ public class TileBoard : MonoBehaviour
     public bool CheckForGameOver()
     {
         if (tiles.Count != grid.Size) {
+            Debug.Log(tiles.Count);
             return false;
         }
         
@@ -667,12 +671,4 @@ public class TileBoard : MonoBehaviour
         BoomButton.gameObject.SetActive(false);
         FlexibleMoveText.gameObject.SetActive(false);
     }
-
-    public void ClearTile(TileCell tileCell, Tile tile)
-    {
-        tileCell.tile = null;
-        Destroy(tile.gameObject);
-        tiles.Remove(tile);
-    }
-    
 }

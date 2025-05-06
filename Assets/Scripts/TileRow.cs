@@ -27,7 +27,6 @@ public class TileRow : MonoBehaviour
         }
         return tilecell;
     }
-
     public void ResetTileCell()
     {
         TileCell tilecell = GetBiggestTileInRow();

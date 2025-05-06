@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -61,7 +62,6 @@ public class Tile : MonoBehaviour
 
         StartCoroutine(Animate(cell.transform.position, false));
     }
-
     public void Merge(TileCell cell)
     {
         if (this.cell != null) {
@@ -73,7 +73,17 @@ public class Tile : MonoBehaviour
 
         StartCoroutine(Animate(cell.transform.position, true));
     }
+    //Use for reverse upgrade
+    public void ReverseMerge(TileCell cell, List<Tile> tiles)
+    {
+        if (this.cell != null) {
+            tiles.Remove(this.cell.tile);
+            this.cell.tile = null;
+        }
+        this.cell = null;
 
+        StartCoroutine(Animate(cell.transform.position, true));
+    }
     private IEnumerator Animate(Vector3 to, bool merging)
     {
         float elapsed = 0f;
